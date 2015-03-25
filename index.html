@@ -1,3 +1,31 @@
-echo 1;
-123456
-test
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>标题</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="js/inc.js"></script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="jumbotron">
+				<h1>Soter 使用手册 v1.0.0</h1>
+				<p>来吧骚年，带你进入soter的奇幻世界...</p>
+
+			</div>
+			<div class="row">
+				<div class="col-md-2" style="min-height: 500px;">
+					
+					<ol>
+						<li><a href="code_specification.html" target="mainBody">代码规范</a></li>
+					</ol>
+				</div>
+				<div class="col-md-10">
+					<iframe src="default.html" name="mainBody"  id="mainBody" scrolling="no" frameborder="0" width="100%" onload="this.height = this.contentWindow.document.documentElement.scrollHeight"></iframe>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/inc.foot.js"></script>
+	</body>
+</html>
