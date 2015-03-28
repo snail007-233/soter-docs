@@ -66,7 +66,7 @@
                                 </li>
                                 <li>
                                         <h4>获取get，post数据</h4>
-                                        通过<b>getPost()</b>方法;我们可以方便的获取get或者post数据。<br/>
+                                        通过<b>Sr::getPost()</b>方法;我们可以方便的获取get或者post数据。<br/>
                                         使用示例：
                                         <pre class="brush:php">
                                                 //首先模拟一个表单代码如下：
@@ -95,7 +95,7 @@
                                 </li>
                                 <li>
                                         <h4>获取post，get数据</h4>
-                                        通过<b>postGet()</b>方法;我们可以方便的获取post或者get数据。<br/>
+                                        通过<b>Sr::postGet()</b>方法;我们可以方便的获取post或者get数据。<br/>
                                         使用示例：
                                         <pre class="brush:php">
                                                 //首先模拟一个表单代码如下：
@@ -123,7 +123,7 @@
                                 </li>
                                 <li>
                                         <h4>获取server数据</h4>
-                                        通过<b>server()</b>方法;我们可以方便的获取server数据。<br/>
+                                        通过<b>Sr::server()</b>方法;我们可以方便的获取server数据。<br/>
                                         使用示例：
                                         <pre class="brush:php">
                                                 //假如url是：http://127.0.0.1/index.php/Welcome/index.do
@@ -133,6 +133,43 @@
                                                 //上面将会输出:/index.php/Welcome/index.do
                                                 //你会注意到我们调用的时候传递了第二个参数1，这是什么意思呢，如果我们不传递PHP_SELF参数，
                                                 //那么Sr::server('PHP_SELF',1)就会返回第二个参数设置的默认值1。
+                                        </pre>
+                                </li>
+                                <li>
+                                        <h4>设置cookie</h4>
+                                        通过<b>Sr::setCookie()</b>方法;我们可以方便的设置cookie。<br/>
+                                        使用示例：
+                                        <pre class="brush:php">
+                                                Sr::setCookie('user_id',2,20,'/','example.com',0);
+                                                //必填。第一个参数 cookie 的名称
+                                                //必填。第二个参数 cookie 的值
+                                                //可选。第三个参数 cookie 的有效期时间
+                                                //可选。第四个参数 Cookie 在服务器端的有效路径
+                                                //可选。第五个参数 规定 cookie 的域名
+                                                //可选。第六个参数 规定是否通过安全的 HTTPS 连接来传输 cookie
+                                        </pre>
+                                </li>
+                                <li>
+                                        <h4>获取cookie数据</h4>
+                                        通过<b>Sr::cookie()</b>方法;我们可以方便的获取cookie数据。<br/>
+                                        使用示例：
+                                        <pre class="brush:php">                                                
+                                                Sr::setCookie('user_id',2);
+                                                Sr::setCookie('phone',13670345217);
+                                                Sr::setCookie('username','名称',3600);
+                                                //该如何设置参考上面的"设置cookie"
+                
+                                                echo Sr::cookie('user_id');  
+                                                //上面将会输出:2
+                                                echo Sr::cookie('phone',1);
+                                                //上面将会输出:13670345217
+                                                //你会注意到我们调用的时候传递了第二个参数1，这是什么意思呢，如果我们不传递phone参数，
+                                                //那么Sr::cookie('phone',1)就会返回第二个参数设置的默认值1。
+                                                echo Sr::cookie('username','',true);
+                                                //上面将会输出：名称
+                                                //你肯定看到了，又多了第三个参数，它又是什么意思呢，
+                                                //如果我们获取的参数内容有可能是html的时候，我们应该对它进行xss过滤，没错,第三个参数设置为true的时候，
+                                                //Sr::cookie()会帮你对参数值进行xss安全过滤。   
                                         </pre>
                                 </li>
                         </ol>
