@@ -81,7 +81,7 @@
                                                 echo Sr::getPost('username');
                                                 //上面将会输出:get数据
                                                 //为什么会输出"get数据"呢？http://127.0.0.1/index.php/Welcome/index.do?username=get数据 我们可以看到链接带username值。
-                                                //所以这个函数是先get抓取，如果没有在抓取post。
+                                                //所以这个函数是先get抓取，如果没有再抓取post。
                                                 echo Sr::getPost('hobby','看书');
                                                 //上面将会输出:word
                                                 //你会注意到我们调用的时候传递了第二个参数"看书"，这是什么意思呢，如果我们不传递hobby参数，
@@ -109,7 +109,7 @@
                                                 //假如你表单点击提交
                                                 echo Sr::postGet('username');
                                                 //上面将会输出:用户名
-                                                //这个函数是先post抓取，如果没有在抓取get。
+                                                //这个函数是先post抓取，如果没有再抓取get。
                                                 echo Sr::postGet('hobby','看书');
                                                 //上面将会输出:word
                                                 //你会注意到我们调用的时候传递了第二个参数"看书"，这是什么意思呢，如果我们不传递hobby参数，
