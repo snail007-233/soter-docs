@@ -53,10 +53,12 @@
                                                 //假如你表单点击提交
                                                 echo Sr::post('username');
                                                 //上面将会输出:用户名
+
                                                 echo Sr::post('hobby','看书');
                                                 //上面将会输出:word
                                                 //你会注意到我们调用的时候传递了第二个参数"看书"，这是什么意思呢，如果我们不传递hobby参数，
                                                 //那么Sr::post('hobby','看书')就会返回第二个参数设置的默认值"看书"。
+
                                                 echo Sr::post('names','',true);
                                                 //上面将会输出：word
                                                 //你肯定看到了，又多了第三个参数，它又是什么意思呢，
@@ -82,10 +84,12 @@
                                                 //上面将会输出:get数据
                                                 //为什么会输出"get数据"呢？http://127.0.0.1/index.php/Welcome/index.do?username=get数据 我们可以看到链接带username值。
                                                 //所以这个函数是先get抓取，如果没有再抓取post。
-                                                echo Sr::getPost('hobby','看书');
+
+                                                echo Sr::getPost('hobby','踢球');
                                                 //上面将会输出:word
-                                                //你会注意到我们调用的时候传递了第二个参数"看书"，这是什么意思呢，如果我们不传递hobby参数，
-                                                //那么Sr::getPost('hobby','看书')就会返回第二个参数设置的默认值"看书"。
+                                                //你会注意到我们调用的时候传递了第二个参数"踢球"，这是什么意思呢，如果我们不传递hobby参数，
+                                                //那么Sr::getPost('hobby','踢球')就会返回第二个参数设置的默认值"踢球"。
+
                                                 echo Sr::getPost('names','',true);
                                                 //上面将会输出：word
                                                 //你肯定看到了，又多了第三个参数，它又是什么意思呢，
@@ -110,10 +114,12 @@
                                                 echo Sr::postGet('username');
                                                 //上面将会输出:用户名
                                                 //这个函数是先post抓取，如果没有再抓取get。
-                                                echo Sr::postGet('hobby','看书');
+
+                                                echo Sr::postGet('hobby','打游戏');
                                                 //上面将会输出:word
-                                                //你会注意到我们调用的时候传递了第二个参数"看书"，这是什么意思呢，如果我们不传递hobby参数，
-                                                //那么Sr::postGet('hobby','看书')就会返回第二个参数设置的默认值"看书"。
+                                                //你会注意到我们调用的时候传递了第二个参数"打游戏"，这是什么意思呢，如果我们不传递hobby参数，
+                                                //那么Sr::postGet('hobby','打游戏')就会返回第二个参数设置的默认值"打游戏"。
+
                                                 echo Sr::postGet('names','',true);
                                                 //上面将会输出：word
                                                 //你肯定看到了，又多了第三个参数，它又是什么意思呢，
@@ -129,10 +135,12 @@
                                                 //假如url是：http://127.0.0.1/index.php/Welcome/index.do
                                                 echo Sr::server('PHP_SELF');
                                                 //上面将会输出:/index.php/Welcome/index.do
-                                                echo Sr::server('PHP_SELF',1);
-                                                //上面将会输出:/index.php/Welcome/index.do
-                                                //你会注意到我们调用的时候传递了第二个参数1，这是什么意思呢，如果我们不传递PHP_SELF参数，
-                                                //那么Sr::server('PHP_SELF',1)就会返回第二个参数设置的默认值1。
+
+                                                //假如url是：http://127.0.0.1/index.php/Welcome/index.do
+                                                echo Sr::server('HTTP_HOST',1);
+                                                //上面将会输出:127.0.0.1
+                                                //你会注意到我们调用的时候传递了第二个参数1，这是什么意思呢，如果我们不传递HTTP_HOST参数，
+                                                //那么Sr::server('HTTP_HOST',1)就会返回第二个参数设置的默认值1。
                                         </pre>
                                 </li>
                                 <li>
@@ -143,15 +151,19 @@
                                                 Sr::setCookie('user_id',20);
                                                 //第一个参数 必填： cookie的名称
                                                 //第二个参数 必填： cookie的值
+
                                                 Sr::setCookie('user_id',20,30);
                                                 //第三个参数 可选： cookie的有效期时间
                                                 //30将设定 cookie 30秒后失效。如果未设定，cookie将会在会话结束后（一般是浏览器关闭）失效。
+
                                                 Sr::setCookie('user_id',20,30,'/');
                                                 //第四个参数 可选： Cookie在服务器端的有效路径
                                                 //如果该参数设为'/'的话，cookie就在整个cookie的域名内有效，如果设为'/foo/'，cookie 就只在cookie的域名下的/foo/目录及其子目录内有效，例如/foo/bar/。默认值为设定cookie的当前目录。
+
                                                 Sr::setCookie('user_id',20,30,'/','example.com');
                                                 //第五个参数 可选： 规定cookie的域名
                                                 //要使cookie 能在如 example.com域名下的所有子域都有效的话，该参数应该设为'.example.com'。虽然.并不必须的，但加上它会兼容更多的浏览器。如果该参数设为www.example.com的话，就只在www子域内有效。
+
                                                 Sr::setCookie('user_id',20,30,'/','example.com',0);
                                                 //第六个参数 可选： 规定是否通过安全的HTTPS连接来传输cookie
                                         </pre>
@@ -168,15 +180,40 @@
                 
                                                 echo Sr::cookie('user_id');  
                                                 //上面将会输出:2
+
                                                 echo Sr::cookie('phone',1);
                                                 //上面将会输出:13670345217
                                                 //你会注意到我们调用的时候传递了第二个参数1，这是什么意思呢，如果我们不传递phone参数，
                                                 //那么Sr::cookie('phone',1)就会返回第二个参数设置的默认值1。
+
                                                 echo Sr::cookie('username','',true);
                                                 //上面将会输出：名称
                                                 //你肯定看到了，又多了第三个参数，它又是什么意思呢，
                                                 //如果我们获取的参数内容有可能是html的时候，我们应该对它进行xss过滤，没错,第三个参数设置为true的时候，
                                                 //Sr::cookie()会帮你对参数值进行xss安全过滤。   
+                                        </pre>
+                                </li>
+                                <li>
+                                        <h4>获取session数据</h4>
+                                        通过<b>Sr::session()</b>方法;我们可以方便的获取session数据。<br/>
+                                        使用示例：
+                                        <pre class="brush:php">                                                
+                                                //假如session值是：$_SESSION['key'] = '1';
+                                                echo Sr::session('key');
+                                                //上面将会输出：1
+
+                                                //假如session值是：$_SESSION['cid'] = '12';
+                                                echo Sr::session('cid',34);
+                                                //上面将会输出：12
+                                                //你会注意到我们调用的时候传递了第二个参数1，这是什么意思呢，如果我们不传递cid参数，
+                                                //那么Sr::session('cid',34)就会返回第二个参数设置的默认值1。
+
+                                                //假如session值是：$_SESSION['user_id'] = '15';
+                                                echo Sr::session('user_id','',true);
+                                                //上面将会输出：15
+                                                //你肯定看到了，又多了第三个参数，它又是什么意思呢，
+                                                //如果我们获取的参数内容有可能是html的时候，我们应该对它进行xss过滤，没错,第三个参数设置为true的时候，
+                                                //Sr::session()会帮你对参数值进行xss安全过滤。
                                         </pre>
                                 </li>
                         </ol>
