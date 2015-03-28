@@ -205,8 +205,8 @@
                                                 //假如session值是：$_SESSION['cid'] = '12';
                                                 echo Sr::session('cid',34);
                                                 //上面将会输出：12
-                                                //你会注意到我们调用的时候传递了第二个参数1，这是什么意思呢，如果我们不传递cid参数，
-                                                //那么Sr::session('cid',34)就会返回第二个参数设置的默认值1。
+                                                //你会注意到我们调用的时候传递了第二个参数34，这是什么意思呢，如果我们不传递cid参数，
+                                                //那么Sr::session('cid',34)就会返回第二个参数设置的默认值34。
 
                                                 //假如session值是：$_SESSION['user_id'] = '15';
                                                 echo Sr::session('user_id','',true);
