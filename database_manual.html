@@ -1,15 +1,170 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>数据库手册</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="js/inc.js"></script>
-    </head>
-    <body>
-        <fieldset>
-	    <legend>数据库手册</legend>
-        </fieldset>
-        <script src="js/inc.foot.js"></script>
-    </body>
+	<head>
+		<title>数据库手册</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="js/inc.js"></script>
+	</head>
+	<body>
+		<fieldset>
+			<legend>数据库手册</legend>
+			<ol>
+				<li>
+					<h2 class="title_h2">Soter数据库功能说明</h2>
+					Soter数据库驱动主要特点：
+					<br>1.支持多主多从，可以设置多个主数据库和多个从数据库,主数据库之间看用户自己情况保持数据一致即可。主之间数据保持一致可以配置主主之间相互主从，或者使用<b>MariaDB Galera Cluster</b>主集群。
+					<br>2.支持慢查询记录，支持用户自定义处理类记录慢查询，是把查询语句写到数据库还是发到远程用户完全可以自定义。
+					<br>3.支持查询索引分析，自动记录不满足设置的索引的查询。此功能只对MySQL有效。
+					<br>原理是通过explain查询语句，检查结果中的type值，值从好到坏依次是:
+					<br>system > const > eq_ref > ref > fulltext > ref_or_null > index_merge > unique_subquery > index_subquery > range > index > ALL，
+					ALL意味着全表扫描了，Soter默认级别是index，意思就是如果explain查询type是index之后的时候会记录这个查询。
+					<br>支持用户自定义处理类处理不满足索引条件的查询。
+					<br>4.支持批量更新，批量插入，批量replace。大幅度提升程序性能。
+					<br>5.支持便捷的ActiveRecord链式数据库查询。
+					<br>6.支持数据库查询缓存，大幅度减少缓存数据库查询结果数据的编码，Soter里面只需要查询的时候加上一个<code>->cache($cacheTime,$cacheKey='')</code>,
+					<br>那么这个查询就具有了缓存的功能，用户无需关心缓存的获取和存储。方法中用户可以省略缓存kye参数，Soter会自动使用md5(sql语句)作为缓存key。
+					<br>另外支持自定义缓存处理类用来处理数据库缓存数据。
+				</li>
+
+				<li>
+					<h2 class="title_h2">数据库配置信息说明</h2>
+					连接数据库的配置信息文件默认是在：<code>application/config/default/database.php</code>
+					打开这个文件我们可以看到一个数据库信息配置的数组，如下：
+					<pre class="brush:php">
+						&lt;?php
+						//数据库配置文件，文件名默认是database.php,
+						//也可以通过在入口文件里面修改配置：
+						//->setDatabseConfigFile('database')
+						//把里面的database参数修改为你想要的配置文件名即可
+						return array(
+						    //默认组
+						    'default_group' => 'mysql',
+						    //组名=>配置
+						    //mysql配置示例
+						    'mysql' => array(
+							'driverType' => 'mysql',
+							'debug' => true,
+							'pconnect' => false,
+							'charset' => 'utf8',
+							'collate' => 'utf8_general_ci',
+							'database' => '',
+							'tablePrefix' => '',
+							'tablePrefixSqlIdentifier' => '_tablePrefix_',
+							//是否开启慢查询记录
+							'slowQueryDebug' => false,
+							'slowQueryTime' => 3000, //慢查询最小时间,单位毫秒，1秒=1000毫秒
+							'slowQueryHandle' => new Soter_Database_SlowQuery_Handle_Default(),
+							/**
+							 * 是否开启没有满足设置的索引类型的查询记录
+							 */
+							'indexDebug' => false,
+							/**
+							 * 索引使用的最小情况，只有小于最小情况的时候才会记录sql到日志
+							 * minIndexType值从好到坏依次是:
+							 * system > const > eq_ref > ref > fulltext > ref_or_null 
+							 * > index_merge > unique_subquery > index_subquery > range 
+							 * > index > ALL 一般来说，得保证查询至少达到range级别，最好能达到ref
+							 * 避免ALL即全表扫描
+							 */
+							'minIndexType' => 'index',
+							'indexHandle' => new Soter_Database_Index_Handle_Default(),
+							'masters' => array(
+							    'master01' => array(
+								'hostname' => '127.0.0.1',
+								'port' => 3306,
+								'username' => 'root',
+								'password' => '',
+							    )
+							),
+							'slaves' => array(
+						//		    'slave01' => array(
+						//			'hostname' => '127.0.0.1',
+						//			'port' => 3306,
+						//			'username' => 'root',
+						//			'password' => '',
+						//		    )
+							)
+						    ),
+						    //sqlite3配置示例
+						    'sqlite3' => array(
+							'driverType' => 'sqlite',
+							'debug' => true,
+							'pconnect' => false,
+							'tablePrefix' => '',
+							'tablePrefixSqlIdentifier' => '_tablePrefix_',
+							//是否开启慢查询记录
+							'slowQueryDebug' => true,
+							'slowQueryTime' => 3000, //单位毫秒，1秒=1000毫秒
+							'slowQueryHandle' => new Soter_Database_SlowQuery_Handle_Default(),
+							'masters' => array(
+							    'master01' => array(
+								'hostname' => 'test.sqlite3', //sqlite3数据库路径
+							    )
+							),
+							'slaves' => array(
+						//		    'slave01' => array(
+						//		    )
+							)
+						    )
+							)
+						;
+					</pre>  
+				</li>
+				<li><h2 class="title_h2">配置中自定义处理类的使用说明</h2>
+					上面介绍中说了，Soter支持：
+					<br>1.自定义慢查询记录处理类。
+					<br>2.自定义不满足设置的索引条件的查询处理类。
+					<br>3.自定义数据库缓存数据的缓存处理类。
+					<br>下面对这三个类的自定义过程进行说明：
+					<h3 class="title_h3">1.自定义慢查询记录处理类</h3>
+					配置中我们看到下面三行和慢查询有关的配置。
+					<pre class="brush:php">
+						//是否开启慢查询记录
+						'slowQueryDebug' => false,
+						'slowQueryTime' => 3000, //慢查询最小时间,单位毫秒，1秒=1000毫秒
+						'slowQueryHandle' => new Soter_Database_SlowQuery_Handle_Default(),
+					</pre>
+					你会注意到，<code>slowQueryHandle</code>默认使用了<code>Soter_Database_SlowQuery_Handle_Default</code>类处理慢查询，
+					<br>它会把慢查询都写入到文件<code>application/storage/slow-query-debug/slow-query-debug.php</code>以便我们分析，
+					<br>这个类实现了<code>Soter_Database_SlowQuery_Handle</code>这个接口，然后就能在这里处理慢查询了，
+					<br>接下来就是知道怎么实现<code>Soter_Database_SlowQuery_Handle</code>接口，我们就可以写自己的慢查询处理类处理慢查询了。
+					<br>首先我们看一下接口的定义代码：
+					<pre class="brush:php">
+						interface Soter_Database_SlowQuery_Handle {
+
+							public function handle($sql, $explainString, $time);
+						}
+					</pre>
+					可以看到接口就定义了一个handle()方法，有三个参数：
+					<br>第一个是慢查询的sql语句字符串。
+					<br>第二个是explain查询得到的字符串信息。
+					<br>第三个是这次查询使用的时间。
+					<br>接下来就是写一个自己的类实现这个接口，把类文件放到合适的位置即可。
+					<br>现在我们实现一个简单的显示出慢查询的自定义类。
+					<br>步骤如下：
+					1.新建一个文件<code>application/classes/SlowQuery/Handle.php</code>
+					2.输入下面代码，其实就是定义了一个类，实现接口并简单的显示出慢查询。
+					<pre class="brush:php">
+						class SlowQuery_Handle implements Soter_Database_SlowQuery_Handle {
+
+							public function handle($sql, $explainString, $time) {
+								$content = "\nSQL : " . $sql
+									. "\nExplain : " . $explainString
+									. "\nUsingTime : " . $time . " ms"
+									. "\nTime : " . date('Y-m-d H:i:s') . "\n";
+								echo $content;
+							}
+
+						}
+					</pre>
+					3.到此为止我们的自定义处理类搞定了，我们为了测试你可以把慢查询时间<b>slowQueryTime</b>改成<b>1</b>，<b>slowQueryDebug</b>设置为<b>false</b>,
+					<br>然后执行一个查询，刷新几次我们会会发现显示出自定义类输出的内容。
+				</li>
+
+			</ol>
+
+		</fieldset>
+		<script src="js/inc.foot.js"></script>
+	</body>
 </html>
