@@ -12,14 +12,14 @@ $(function() {
                 $('.title_h2').each(function(index) {
                         var name = 'db_taget_' + index;
                         $(this).before('<a name="' + name + '"></a>');
-                        lis.push('<li><a href="#' + name + '">' + $(this).text() + '</a></li>');
+                        lis.push('<li><a href="#' + name + '" class="anchor">' + $(this).text() + '</a></li>');
                 });
                 if (lis.length) {
                         $('legend').before('<div><h2 class="title_h2">目录</h2><ol>' + lis.join('') + '</ol></div>');
                 }
         };
         
-        $("a").each(function() {
+        $(".anchor").each(function() {
                 var link = $(this);
                 var href = link.attr("href");
                 if (href && href[0] == "#") {
