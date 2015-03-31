@@ -223,7 +223,7 @@
 					<br>这样我们就不用手动加上表前缀，保证了代码的通用性可移植性。
 					<br>9.<b>masters</b>
 					<br>masters是让我们设置我们有哪些主数据库要用，可以有一个或者多个。
-					<br>设置的时候为每个数据库主机指定一个数组key就行，这样能够让Soter区分出不懂的主机。
+					<br>设置的时候为每个数据库主机指定一个数组key就行，这样能够让Soter区分出不同的主机。
 					<br>上面的<b>master01</b>就是一个key，我们也可以把它叫做master001。
 					<br>有多个主数据库的时候，类比master01加在master01下面就行了。
 					<br>有两个主数据库的时候，配置实例：
@@ -248,7 +248,7 @@
 					<b style="color: red;">当我们只有一个数据库的时候，设置一个master就可以了。slaves保留空就行了。</b>
 					<br>10.<b>slaves</b>
 					<br>slaves是让我们设置我们有哪些从数据库要用，可以有一个或者多个。
-					<br>设置的时候为每个数据库主机指定一个数组key就行，这样能够让Soter区分出不懂的主机。
+					<br>设置的时候为每个数据库主机指定一个数组key就行，这样能够让Soter区分出不同的主机。
 					<br>上面的<b>slave01</b>就是一个key，我们也可以把它叫做slave001。
 					<br>有多个从数据库的时候，类比slave01加在slave01下面就行了。
 					<br>有两个从数据库的时候，配置实例：
@@ -399,7 +399,7 @@
 					<br>当执行的是DELETE，REPLACE，UPDATE，INSERT的时候，exexute()返回的是数据库中受到影响的行数；
 					<br>INSERT，REPLACE操作的时候可以通过<b>Sr::db()->lastId()</b>获取最后插入的ID。
 					<br><b>2.Soter_Database_ResultSet结果集对象</b>
-					<br>当执行的是SELECT的时候，exexute()返回的是Soter_Database_ResultSet结果集对象。
+					<br>当执行的是SELECT的时候，exexute()返回的是Soter_Database_Resultset结果集对象。
 					<br><b>3.true或false</b>
 					<br>当执行的是上面1和2之外的查询的时候，exexute()返回的是执行成功true或者失败false。
 					<h3 class="title_h3">2.select</h3>
@@ -487,8 +487,58 @@
 					</pre>
 
 				</li>
-
-
+				<li><h3 class="title_h2">查询结果集的使用</h3>
+					上面说到，当我们执行select查询的时候，execute方法返回的是一个Soter_Database_Reaultset对象。
+					<br>这个对象提供了很多有用的方法处理结果集。
+					<br>下面对它的所有方法一一介绍：
+					<br>1.<b>rows</b>($isAssoc = true)
+					<br>作用：得到查询结果数据数组
+					<br>参数：$isAssoc 是否返回关联数组，true返回关联数组，false返回数字索引数组
+					<br>2.<b>row</b>($index = null, $isAssoc = true) 
+					<br>作用：得到查询结果数据数组中的第$index个记录的数据，默认取第一条
+					<br>参数：$index   获取查询结果中的第几条，0开始的数字，0是第一条
+					<br>      $isAssoc 是否返回关联数组
+					<br>3.<b>values</b>($columnName)
+					<br>作用：得到查询结果数据数组中的某一字段的一维数组
+					<br>参数：$columnName   字段名称
+					<br>4.<b>value</b>($columnName, $default = null, $index = null)
+					<br>作用：得到查询结果数据数组中的第$index条记录的
+					<br>参数：$columnName   字段名称
+					<br>5.<b>key</b>($columnName)
+					<br>作用：设置使用哪个字段的值作为返回的结果集数组的键
+					<br>参数：$columnName   字段名称
+					<br>比如我们查询用户信息，设置返回的数据键值不是0开始的数字，而是用户id，
+					<br>我们可以这样查询
+					<pre class="brush:php">
+						$rows=Sr::db()->select('*')->from('user')->execute()->key('user_id')->rows();
+						//那么我们得到类似的下面的结果
+						$rows形如：array(
+								'223'=>array('user_id'=>223,'uname'=>'test'),
+								'224'=>array('user_id'=>224,'uname'=>'test'),
+								...
+							)
+					</pre>
+					<br>6.<b>total()</b> 
+					<br>作用：返回查询结果中有多少条数据
+					
+					</li>
+				<li><h3 class="title_h2">查询缓存</h3>
+					通过cache方法我们可以十分方便的把我们的查询结果缓存一定的时间。
+					<br>需要对一个查询开启缓存效果我们只需要在查询前面调用cache方法即可。
+					<br>示例如下：
+					<pre class="brush:php">
+						//缓存查询结果60秒
+						$rows= Sr::db()->cache(60)->select('count('.Sr::db()->wrap('id').') as total,id')->from('c')
+								->limit(0,1')
+								->execute()
+								->rows();
+						//缓存查询结果60秒,并指定缓存key是top_user
+						$rows= Sr::db()->cache(60,'top_user')->select('count('.Sr::db()->wrap('id').') as total,id')->from('c')
+								->limit(0,1')
+								->execute()
+								->rows();
+					</pre>
+				</li>
 				<li><h3 class="title_h2">插入数据</h3>
 					我们可以通过insert方法方便的将键值对数组插入数据库，键是字段名，值是字段值
 					<pre class="brush:php">
