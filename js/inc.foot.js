@@ -13,7 +13,6 @@ $(function () {
 			var name = 'db_taget_' + index;
 			$(this).prepend('<a name="' + name + '"></a>');
 			lis.push('<li><a href="#' + name + '">' + $(this).text() + '</a></li>');
-			$(this).append('<a class="gotoTop" style="font-size:10px;margin-left:10px;" href="javascript:void(0);">返回顶部</a>');
 		});
 		if(lis.length){
 			$('legend').before('<div><h2 class="title_h2">目录</h2><ol>' + lis.join('') + '</ol></div>');
