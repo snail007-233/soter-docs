@@ -607,8 +607,8 @@
 				</li>
 				<li><h3 class="title_h2">显式获取sql语句和值数组</h3>
 					上的例子中我们都是直接这样直接 echo  Sr::db()->delete('a',$where)，echo一个数据库操作对象得到sql预处理语句。
-					我们还可以通过getSql方法显示获取sql预处理语句，使用getSqlValues方法获取我们在的预处理语句中使用的值。
-					比如下面：
+					<br>我们还可以通过getSql方法显示获取sql预处理语句，使用getSqlValues方法获取我们在的预处理语句中使用的值。
+					<br>比如下面：
 					<pre class="brush:php">
 						$where=array('id >'=>100);
 						Sr::db()->delete('a',$where);
