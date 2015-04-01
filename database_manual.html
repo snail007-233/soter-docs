@@ -406,7 +406,7 @@
 					<pre class="brush:php">
 						echo Sr::db()->select('*')->from('user');
 						//将输出：SELECT * FROM `user`;
-						$rs=Sr::db()->select('*')->from('user')->execute()->rows();
+						$rs=Sr::db()->execute()->rows();
 						//$rs是数据库结果集数组
 					</pre>
 					提示：<b style="color:red">上面第一句，并没有真正的连接数据库进行查询，只是编译sql语句，
@@ -616,7 +616,7 @@
 							$datac[] = array('cname' => 'cname' . rand(1000, 10000));
 							$datac[] = array('cname' => 'cname' . rand(1000, 10000));
 							$datac[] = array('cname' => 'cname' . rand(1000, 10000));
-							$this->db->insertBatch('c', $datac)->execute()
+							$this->db->insertBatch('c', $datac)->execute();
 							//....其它操作
 							Sr::db()->select('none')->from('a')->execute();
 							//提交事务							
