@@ -1,15 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>自定路由</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="js/inc.js"></script>
-    </head>
-    <body>
-        <fieldset>
-	    <legend>自定路由</legend>
-        </fieldset>
-	<script src="js/inc.foot.js"></script>
-    </body>
+	<head>
+		<title>Soter路由</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="js/inc.js"></script>
+	</head>
+	<body>
+		<fieldset>
+			<legend>Soter路由</legend>
+			<ol>
+				<li><h2 class="title_h2">系统路由</h2>
+					系统默认提供了：
+					<br>1.PATH_INFO路由器。
+					<br>2.GET模式路由器。
+					<br>默认情况下，我们可以使用PATH_INFO路由器的访问规则或者GET模式路由器规则访问我们的控制器。
+					<br>下面对这两个路由器进行介绍：
+					<h3 class="title_h3">1.PATH_INFO路由器</h3>
+					在入口文件里面我们会发现下面的配置。
+					<pre class="brush:php">
+						//初始化请求
+						->setRequest(new Soter_Request(Sr::arrayGet($_SERVER, 'REQUEST_URI')))
+						//注册默认pathinfo路由器
+						->addRouter(new Soter_Default_Router_PathInfo())
+						//pathinfo路由器,注册uri重写
+						->setUriRewriter(new Soter_Uri_Rewriter_Default())
+					</pre>
+					从上面我们可以看到Soter初始化请求的时候，注册了一个Soter_Request对象，并在构造方法里面传入了$_SERVER['REQUEST_URI']，
+					<br>这个构造方法里面传入的URI就是所有路由器接受的原始URI，各种路由器可以按着自己的规则分析这个URI，实现不同功能的路由器。
+					<br>接着通过addRouter方法注册了系统默认的Soter_Default_Router_PathInfo路由器类，也就是PATH_INFO路由器。
+					<br>PATH_INFO路由器,是通过分析符合形如：/index.php/Welcome/user.do这样的URI的路由器。
+					<br><b class="text_strong">PATH_INFO路由器支持的访问规则如下：</b>
+					<br>1.比如：<b>/index.php/Welcome/article.do</b>	
+					<br>访问的就是控制器application/classes/Controller/Welcome.php,中的do_article方法。
+					<br>2.假如我们在入口文件里面注册了hmvc模块Demo，那么访问：<b>/index.php/Demo/Welcome/article.do</b>
+					<br>访问的就是控制器<b>application/hvmc/demo/classes/Controller/Welcome.php</b>,中的<b>do_article</b>方法。
+					<br>3.比如：<b>/index.php/Welcome/article-system-001.do</b>
+					<br>传递了两个参数给Welcome->do_article($cat='food',$id='002'),其中$cat是system，$id是001
+					<br>为了避免没有传递参数的时候报错，我们需要给$cat和$id设置默认值。
+					<br>4.比如：<b>/index.php/Welcome/article--001.do</b>
+					<br>传递了两个参数给Welcome->do_article($cat='food',$id='002'),其中$cat是空，$id是001
+					<br>5.比如：<b>/index.php/Welcome/article-system-.do</b>
+					<br>传递了两个参数给Welcome->do_article($cat='food',$id='002'),其中$cat是system，$id是空
+					<br>6.比如：<b>/index.php/Welcome/article-system.do</b>
+					<br>传递了两个参数给Welcome->do_article($cat='food',$id='002'),其中$cat是system，$id是002
+					<br>7.比如：<b>/index.php/Welcome/article.do</b>
+					<br>传递了两个参数给Welcome->do_article($cat='food',$id='002'),其中$cat是food，$id是002
+					<br><b class="text_strong">默认的参数分隔符 - 可以通过入口文件里面修改配置 ->setMethodParametersDelimiter('-')进行修改。</b>
+					<h2 class="title_h3">2.PATH_INFO路由器URI重写</h2>
+					Soter里面用户可以自定义PATH_INFO路由器URI重写类，默认情况下PATH_INFO路由器处理的是$_SERVER['REQUEST_URI']，
+					<br>但是用户可以通过注册自己的URI重写类对$_SERVER['REQUEST_URI']进行重写，把重写之后的URI返回给PATH_INF路由器使用。
+					<br>满足用户对路由器规则的各种需求。
+					<br>上面的配置里面我们看到下面的配置：
+					<pre class="brush:php">
+						//pathinfo路由器,注册uri重写
+						->setUriRewriter(new Soter_Uri_Rewriter_Default())
+					</pre>
+					这个配置就是注册uri重写，稍候我们会详细介绍rui重写类的写法。这里先说明他的作用。
+					<br>配置中我们可以看到Soter注册了一个默认的uri重写类Soter_Uri_Rewriter_Default。
+					<br>下面是这个类的实现代码，我们一起看一下：
+					<pre class="brush:php">
+						//pathinfo路由器,注册uri重写
+						->setUriRewriter(new Soter_Uri_Rewriter_Default())
+					</pre>
+					<h3 class="title_h3">3.GET模式路由器。</h3>
+				</li>
+				
+				<li><h2 class="title_h2">用户路由器</h2>
+					Soter里面用户可以自定义路由器。
+				</li>
+			</ol>
+
+		</fieldset>
+		<script src="js/inc.foot.js"></script>
+	</body>
 </html>

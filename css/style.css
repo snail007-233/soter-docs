@@ -22,3 +22,8 @@ body{
 	font-size: 1.0em;
 	color: #204d74;
 }
+.text_strong{
+	font-weight: bold;
+	font-size: 1.0em;
+	color:red;
+}

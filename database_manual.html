@@ -605,6 +605,22 @@
 						//将输出：DELETE FROM `a` WHERE `id` > ?
 					</pre>
 				</li>
+				<li><h3 class="title_h2">显式获取sql语句和值数组</h3>
+					上的例子中我们都是直接这样直接 echo  Sr::db()->delete('a',$where)，echo一个数据库操作对象得到sql预处理语句。
+					我们还可以通过getSql方法显示获取sql预处理语句，使用getSqlValues方法获取我们在的预处理语句中使用的值。
+					比如下面：
+					<pre class="brush:php">
+						$where=array('id >'=>100);
+						Sr::db()->delete('a',$where);
+						echo Sr::db()->getSql();
+						//将输出：DELETE FROM `a` WHERE `id` > ?
+						Sr::dump(Sr::db()->getSqlValues());
+						//将输出：array(1) {
+						//		[0]=>
+						//		int(100)
+						//	      }
+					</pre>
+				</li>
 				<li><h3 class="title_h2">事务</h3>
 					同过begin、commit、rollback三个方法的配合
 					我们可以方便的处理事务，下面是一个完整的事务例子。
