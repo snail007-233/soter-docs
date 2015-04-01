@@ -10,7 +10,7 @@ $(function() {
         if ($('legend')[0]) {
                 var lis = [];
                 $('.title_h2').each(function(index) {
-                        var name = 'db_taget_' + index;
+                        var name = '_taget_' + index;
                         $(this).before('<a name="' + name + '"></a>');
                         lis.push('<li><a href="#' + name + '" class="anchor">' + $(this).text() + '</a></li>');
 			$(this).append('<a href="#top" style="font-size:12px;margin-left:30px;" class="anchor" ">返回顶部</a>');
