@@ -13,9 +13,10 @@ $(function() {
                         var name = 'db_taget_' + index;
                         $(this).before('<a name="' + name + '"></a>');
                         lis.push('<li><a href="#' + name + '" class="anchor">' + $(this).text() + '</a></li>');
+			$(this).append('<a href="#top" style="font-size:12px;margin-left:30px;" class="anchor" ">返回顶部</a>');
                 });
                 if (lis.length) {
-                        $('legend').before('<div><h2 class="title_h2">目录</h2><ol>' + lis.join('') + '</ol></div>');
+                        $('legend').before('<div><a name="top"></a><h2 class="title_h2">目录</h2><ol>' + lis.join('') + '</ol></div>');
                 }
 
                 $(".anchor").each(function() {
@@ -34,7 +35,8 @@ $(function() {
                                         }
                                         if (element) {
                                                 var offset = element.offset();
-                                                window.parent.scrollTo(offset.left, offset.top);
+						var top=offset.top+230;
+                                                window.parent.scrollTo(offset.left, top);
                                         }
                                         return false;
                                 });
