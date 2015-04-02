@@ -57,7 +57,7 @@
                                 
                                 <li>
                                         <h2 class="title_h2">和控制器相关的配置</h2>
-                                        配置在<code>application\bootstrap.php</code>文件里面
+                                        配置在入口文件里面
                                         <br />1.默认控制器
                                         <br /><code>->setDefaultController('Welcome')</code>
                                         <br />2.默认方法
@@ -66,6 +66,8 @@
                                         <br /><code>->setMethodPrefix('do_')</code>
                                         <br />4.方法url后缀,比如_do或者.controller.php
                                         <br /><code>->setMethodUriSubfix('.do')</code>
+                                        <br />5.当用户在浏览器地址里面只输入了域名，或者hvmc模块。没有输入控制器名称和方法名称。 
+                                        <br />那么在这种情况下我们可以设置一个默认的控制器和默认的方法。详细的内容参考<a href="router.html">路由手册</a>
                                 </li>
                         </ol>
                 </fieldset>
