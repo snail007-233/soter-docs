@@ -13,7 +13,7 @@
                                 <li>
                                         <h2 class="title_h2">存放路径</h2>
                                         控制器文件是放在<code>application/classes/Controller</code>文件夹里面。
-                                        <br />classes类目录下的类名和它的文件的位置是对应的。
+                                        <br />classes类目录下的文件类名和它的文件的位置是对应的。
                                         <br />比如有文件：classes/Controller/Vip/User.php
                                         <br />那么User.php文件里面的类名就应该是：Controller_Vip_User,也就是下划线代表着文件夹的分隔符。
                                 </li>
@@ -35,7 +35,9 @@
                                         <br />1.这个地址是访问控制器目录下面的<code>classes/Controller/Welcome.php</code>里面的Welcome类的do_index方法。
                                         <br />2.get模式中c参数是代表控制器，a参数是代码方法。
                                         <br />3.同时传递了一个get变量id，可以通过Sr::get('id');获取123。
-                                        <br /> 可以看出两个模式的区别就是index.php后面一个是?一个是/,get方式传递和普通get方式一样，还有get模式请求方法是不用带url后缀而path_info模式是需要带url后缀。了解详细的路由手册，点击进入<a href="router.html">路由手册</a>
+                                        <br /> 可以看出两个模式的区别就是index.php后面一个是?一个是/,get方式传递和普通get方式一样，还有get模式请求方法是不用带url后缀而path_info模式是需要带url后缀。
+                                        <br />提示
+                                        <br />了解详细的路由手册，点击进入<a href="router.html">路由手册</a>
 
                                 </li>
                                 
