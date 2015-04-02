@@ -43,6 +43,34 @@
 					<br>使用方法：->setCacheHandle(new Soter_Cache_File(SOTER_APP_PATH . 'storage/cache/''))
 					<br>它会把缓存数据写到<code>application/storage/cache/</code>目录下面。
 				</li>
+				<li><h3 class="title_h2">使用缓存</h3>
+					当我们安着上面的操作配置了缓存处理类之后，我们就可以用下面的方法操作缓存数据了。
+					<h3 class="title_h3">1.设置缓存</h3>
+					<pre class="brush:php">
+						 Sr::cache()->set($key, $value, $cacheTime)
+					</pre>
+					参数1：缓存key。
+					<br>参数2：缓存的数据。
+					<br>参数3：缓存的时间，单位秒。比如：缓存60秒。$cacheTime就是：60。
+					<br>返回值：成功：true，失败：false。
+					<h3 class="title_h3">2.获取缓存</h3>
+					<pre class="brush:php">
+						 Sr::cache()->get($key)
+					</pre>
+					参数1：缓存key。
+					<br>返回值：成功：缓存数据，失败：NULL。
+					<h3 class="title_h3">3.删除缓存</h3>
+					<pre class="brush:php">
+						 Sr::cache()->delete($key)
+					</pre>
+					参数1：缓存key。
+					<br>返回值：成功：true，失败：false。
+					<h3 class="title_h3">4.清空缓存</h3>
+					<pre class="brush:php">
+						 Sr::cache()->clean()
+					</pre>
+					返回值：成功：true，失败：false。
+				</li>
 				<li><h3 class="title_h2">自定义缓存处理类</h3>
 					如果要把自己的类作为缓存类使用，那么必须实现缓存接口<code>Soter_Cache</code>，上面的几个Soter内置的缓存类都实现了这个接口。
 					<br>现在我们看一下这个接口的定义代码：
