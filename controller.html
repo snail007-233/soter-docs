@@ -14,7 +14,9 @@
                                         <h2 class="title_h2">存放路径</h2>
                                         控制器文件是放在<code>application/classes/Controller</code>文件夹里面。
                                         <br />classes类目录下的文件类名和它的文件的位置是对应的。
-                                        <br />比如有文件：classes/Controller/Vip/User.php
+                                        <br />1.比如有文件：classes/Controller/CommonUser.php
+                                        <br />那么CommonUser.php文件里面的类名就应该是：Controller_CommonUser。
+					<br />2.比如有文件：classes/Controller/Vip/User.php
                                         <br />那么User.php文件里面的类名就应该是：Controller_Vip_User,也就是下划线代表着文件夹的分隔符。
                                 </li>
                                 <li>
@@ -24,7 +26,6 @@
                                 <li>
                                         <h2 class="title_h2">访问控制器</h2>
                                         控制器访问支持PATH_INFO和GET模式。
-                                        
                                         <br />1.<b>PATH_INFO</b>模式
 					<br />比如访问：http://127.0.0.1/index.php/Welcome/index.do?id=123
                                         <br />1 这里假定控制器文件配置方法url后缀是.do，方法前缀是do，方法名首字母大写不包含前缀。
