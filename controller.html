@@ -11,25 +11,37 @@
                         <legend>控制器</legend>
                         <ol>
                                 <li>
+                                        <h2 class="title_h2">存放路径</h2>
+                                        控制器文件是放在<code>application/classes/Controller</code>文件夹里面。
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">命名规则</h2>
+                                        控制器文件名要对应类名，必须带前缀<code>Controller_</code>，大小写敏感
+例如：Controller_Welcome。
+                                </li>
+                                <li>
                                         <h2 class="title_h2">访问控制器</h2>
-                                        控制器访问支持PathInfo模式。下面是个例子：
-                                        <br />这里假定控制器文件配置方法url后缀是.php，方法前缀是do，方法名首字母大写不包含前缀。
-                                        <br /><b>PathInfo</b>模式：http://127.0.0.1/index.php/Welcome/index.php?id=123
+                                        控制器访问支持PATH_INFO模式。
+                                        <br />下面是个例子：
+                                        <br />这里假定控制器文件配置方法url后缀是.do，方法前缀是do，方法名首字母大写不包含前缀。
+                                        <br /><b>PATH_INFO</b>模式：http://127.0.0.1/index.php/Welcome/index.do?id=123
                                         <br />说明：
-                                        <br />1.这个地址是访问控制器目录下面的<code>classes\Controller\Welcome.php</code>里面的Welcome类的do_index方法。
+                                        <br />1.这个地址是访问控制器目录下面的<code>classes/Controller/Welcome.php</code>里面的Welcome类的do_index方法。
                                         <br />2.同时传递了一个get变量id，可以通过Sr::get('id');获取123。
+                                        <br /><b>GET</b>模式：http://127.0.0.1/index.php?c=Welcome&a=index&id=123 
+                                        <br />1.这个地址是访问控制器目录下面的<code>classes/Controller/Welcome.php</code>里面的Welcome类的do_index方法。
+                                        <br />2.get模式中c参数是代表控制器，a参数是代码方法。
+                                        <br />3.同时传递了一个get变量id，可以通过Sr::get('id');获取123。
+                                        <br /> 可以看出两个模式的区别就是index.php后面一个是?一个是/,get方式传递和普通get方式一样，还有get模式请求方法是不用带url后缀而path_info模式是需要带url后缀。了解详细的路由手册，点击进入<a href="router.html">路由手册</a>
+
                                 </li>
                                 
                                 <li>
                                         <h2 class="title_h2">代码规范</h2>
-                                        控制器类必须继承Soter_Controller类，类名必须带前缀<code>Controller_</code>，类名首字母大写。
+                                        控制器类必须继承<code>Soter_Controller</code>类，类名首字母大写。
                                         <br />示例如下：
                                         <pre class="brush:php">
                                                 class Controller_Welcome extends Soter_Controller {
-
-                                                        public function __construct(){
-                                                                echo '构造函数';
-                                                        }
 
                                                         public function do_index() {
                                                                 echo Sr::get('id');
@@ -40,15 +52,15 @@
                                 
                                 <li>
                                         <h2 class="title_h2">和控制器相关的配置</h2>
-                                        <br />配置在<code>application\bootstrap.php</code>文件里面
+                                        配置在<code>application\bootstrap.php</code>文件里面
                                         <br />1.默认控制器
                                         <br /><code>->setDefaultController('Welcome')</code>
                                         <br />2.默认方法
                                         <br /><code>->setDefaultController('index')</code>
                                         <br />3.方法前缀
                                         <br /><code>->setMethodPrefix('do_')</code>
-                                        <br />4.方法url后缀,比如_php或者.controller.php
-                                        <br /><code>->setMethodUriSubfix('.php')</code>
+                                        <br />4.方法url后缀,比如_do或者.controller.php
+                                        <br /><code>->setMethodUriSubfix('.do')</code>
                                 </li>
                         </ol>
                 </fieldset>
