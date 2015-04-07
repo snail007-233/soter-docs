@@ -30,26 +30,34 @@
                                                 Sr::business('Vip_User');
                                         </pre>
                                         4.Business是必须要继承<code>Soter_Business</code>类。
-                                        <br>示例如下：
-                                        <pre class="brush:php">
-                                                class Business_TestBusiness extends Soter_Business {
-                                                        function index(){
-                                                                return 'hello business';
-                                                        }
-                                                }  
-                                        </pre>
-                                        <br>这里有个控制器的例子，加载一个Business
+                                        <br>下面我们自定义一个加载Business
+                                        <br>1.新建控制器文件application/classes/Controller/Welcome.php
+                                        <br>2.输入以下代码：
                                         <pre class="brush:php">
                                                 class Controller_Welcome extends Soter_Controller {
                                                         public function do_business() {
                                                                 $business = Sr::business('TestBusiness');
-                                                                echo $business->index();
+                                                                echo $business->hello();
                                                         }
                                                 }  
-                                                //浏览器访问：http://127.0.0.1/index.php/Welcome/business.do
-                                                //将输出：hello business
                                         </pre>
-                                        <b class="text_strong">提示：</b>
+                                        3.新建Business文件application/classes/Business/TestBusiness.php
+                                        <br>4.输入以下代码：
+                                        <pre class="brush:php">
+                                                class Business_TestBusiness extends Soter_Business {
+                                                        function hello(){
+                                                                return 'hello business';
+                                                        }
+                                                }  
+                                        </pre>
+                                        5.浏览器访问：http://127.0.0.1/index.php/Welcome/business.do
+                                        <br>//将输出：hello business
+                                        <br>6.为什么会输出“<b>hello business</b>”?
+                                        <br>我们可以从上面例子看Controller_Welcome控制器类，
+                                        <br>在do_business方法里面做了加载Business层的Business_TestBusiness类赋值给<b>$business</b>。
+                                        <br>然后通过<b>$business</b>输出Business_TestBusiness类的hello方法,
+                                        <br>所以浏览器才会显示“<b>hello business</b>”。
+                                        <br><b class="text_strong">提示：</b>
                                         <br>详细的内容参考<a href="model.html">模型手册</a>的“<b>business</b>”
                                 </li>
                         </ol>
