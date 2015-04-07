@@ -15,7 +15,7 @@
                                         1.business可以在<a href="controller.html">控制器</a>中被引用。
                                         <br>示例如下：
                                         <pre class="brush:php">
-                                                Sr::business('TestDao');
+                                                Sr::business('TestBusiness');
                                         </pre>
                                         2.比如有文件：classes/Business/CommonUser.php 
                                         <br>那么CommonUser.php文件里面的类名就应该是：Business_CommonUser。
@@ -29,6 +29,7 @@
                                         <pre class="brush:php">
                                                 Sr::business('Vip_User');
                                         </pre>
+                                        4.Business是必须要继承<code>Soter_Business</code>类，类名首字母大写。
                                         <br><b class="text_strong">提示：</b>
                                         <br>详细的内容参考<a href="model.html">模型手册</a>的“<b>business</b>”
                                 </li>
