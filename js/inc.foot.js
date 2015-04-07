@@ -35,7 +35,7 @@ $(function() {
                                         }
                                         if (element) {
                                                 var offset = element.offset();
-						var top=offset.top+230;
+						var top=offset.top+150;
                                                 window.parent.scrollTo(offset.left, top);
                                         }
                                         return false;
