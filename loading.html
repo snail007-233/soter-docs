@@ -37,6 +37,9 @@
                                         <br>那么要加载Bussiness类如下:
                                         <pre class="brush:php">
                                                 Sr::business('Vip_User');
+                                                //还有另一种方式例如以下
+                                                Sr::bussiness('Vip/User.php');
+                                                //我们也可以不用带.php后缀，个人建议加上去因为兼容性比就好
                                         </pre>
                                         6.下面我们自定义一个加载Business层类
                                         <br>6.1.新建Business文件application/classes/Business/TestBusiness.php
