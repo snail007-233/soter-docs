@@ -13,7 +13,7 @@
 				<li>
 					<h2 class="title_h2">Model模型层规范</h2>
                                         Model类文件都放在<code>application/classes/Model</code>文件夹里面
-                                        <br>Model必须要继承<code>Soter_Model</code>类。
+                                        <br>Model必须要继承<code>Soter_Model</code>类，类名必须带<code>Model_</code>前缀。
                                         <br>示例如下：
                                         <br>1.新建Model文件application/classes/Model/TestModel.php
                                         <br>2.输入以下代码：
@@ -27,12 +27,12 @@
                                 </li>
                                 <li>
                                         <h2 class="title_h2">使用Model层</h2>
-                                        可以在任意地方使用下面的代码加载一个model层类：
+                                        可以在任意地方使用下面的代码加载一个Model层类：
                                         <br>示例如下：
                                         <pre class="brush:php">
                                                 Sr::model('TestModel');
                                         </pre>
-                                        我们可以看到上面有一个参数，这个是什么意思呢，是加载model类的时候，不需要前缀<code>Model_</code>， 
+                                        我们可以看到上面有一个参数，这个是什么意思呢，是加载Model类的时候，不需要前缀<code>Model_</code>， 
                                         <br>比如上面的：Model_TestModel，加载的时候只用Sr::model('TestModel');
                                         <br>例如:我们要创建Model类文件名为ArticleModel.php，类名就是Model_ArticleModel，那么参数就要输入ArticleModel
                                 </li>

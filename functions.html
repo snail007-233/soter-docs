@@ -13,7 +13,7 @@
 				<li>
 					<h2 class="title_h2">文件规范</h2>
                                         1.函数文件都放在<code>application/functions</code>文件夹里面
-                                        <br>2.函数文件名，每个单词的首字母大写加下划线。比如：User_Vip.php
+                                        <br>2.函数文件名，每个单词的首字母大写。比如：UserVip.php
                                         <br>3.函数名请用驼峰命名法。比如：myUserVip()
                                 </li>
                                 <li>
@@ -80,13 +80,14 @@
                                                 ))
                                         </pre>
                                         那怎么知道有没有加载到呢？接下我们一起动手敲下代码。
-                                        <br>1.新建Functions文件application/functions/Common.php
+                                        <br>步骤如下：
+                                        <br>1.新建Functions文件application/functions/User.php
                                         <br>2.输入以下代码：
                                         <pre class="brush:php">
                                                 &lt;?php
 
-                                                function myCommon(){
-                                                        return 'myCommon';
+                                                function myUserName(){
+                                                        return 'myUserName';
                                                 } 
                                         </pre>
                                         3.新建Functions文件application/functions/Company.php
@@ -101,7 +102,7 @@
                                         5.修改入口文件
                                         <pre class="brush:php">
                                                 ->addAutoloadFunctions(array(
-                                                        'Common',
+                                                        'User',
                                                         'Company'
                                                 ))
                                         </pre>
@@ -113,12 +114,12 @@
                                                 class Controller_Welcome extends Soter_Controller {
 
                                                         public function do_functionsAuto() {
-                                                                echo myCommon().'_'.myJob();
+                                                                echo myUserName().'_'.myJob();
                                                         }
                                                 }
                                         </pre>
-                                        5.浏览器访问：http://127.0.0.1/index.php/Welcome/functionsAuto.do
-                                        <br>//将输出：myCommon_myJob
+                                        8.浏览器访问：http://127.0.0.1/index.php/Welcome/functionsAuto.do
+                                        <br>//将输出：myUserName_myJob
                                 </li>
                         </ol>
                 </fieldset>
