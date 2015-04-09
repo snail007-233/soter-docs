@@ -24,7 +24,10 @@
 
                                                 }
                                         </pre>
-                                        3.可以在任意地方使用下面的代码加载一个model层类：
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">使用Model层</h2>
+                                        可以在任意地方使用下面的代码加载一个model层类：
                                         <br>示例如下：
                                         <pre class="brush:php">
                                                 Sr::model('TestModel');
@@ -32,7 +35,10 @@
                                         我们可以看到上面有一个参数，这个是什么意思呢，是加载model类的时候，不需要前缀<code>Model_</code>， 
                                         <br>比如上面的：Model_TestModel，加载的时候只用Sr::model('TestModel');
                                         <br>例如:我们要创建Model类文件名为ArticleModel.php，类名就是Model_ArticleModel，那么参数就要输入ArticleModel
-                                        <br>4.比如有文件：classes/Model/ArticleUser.php 
+                                </li>
+				<li>
+					<h2 class="title_h2">示例一</h2>
+                                        比如有文件：classes/Model/ArticleUser.php 
                                         <br>那么ArticleUser.php文件里面的类名就应该是：Model_ArticleUser。
                                         <br>那么要加载Model类如下:
                                         <pre class="brush:php">
@@ -40,7 +46,7 @@
                                         </pre>
 				</li>
 				<li>
-					<h2 class="title_h2">创建自己的Model类</h2>
+					<h2 class="title_h2">示例二</h2>
                                         比如有文件：classes/Model/User/Message.php 
                                         <br>那么Message.php文件里面的类名就应该是：Model_User_Message,也就是下划线代表着文件夹的分隔符。
                                         <br>那么要加载Model类如下:
@@ -51,7 +57,8 @@
                                                 //我们也可以不用带.php后缀,例如以下：
                                                 Sr::model('User/Message');
                                         </pre>
-					<h3 class="title_h3">自定义一个加载Model层类</h3>
+                                <li>
+					<h2 class="title_h2">创建自己的Model类</h2>
                                         下面我们自定义一个加载Model层类
                                         <br>1.新建Model文件application/classes/Model/TestModel.php
                                         <br>2.输入以下代码：
