@@ -520,7 +520,13 @@
 					</pre>
 					<br>6.<b>total()</b> 
 					<br>作用：返回查询结果中有多少条数据
-					
+					<br>7.<b>objects</b>($beanClassName)
+					<br>作用：得到查询结果数据数组,数组元素是传入的bean对象。
+					<br>参数：$beanClassName 数据库表的Soter_Bean类名称，Soter_Bean规范可以参考“<a href="bean.html">Bean实体</a>”
+					<br>8.<b>object</b>($beanClassName, $index = null) 
+					<br>作用：得到查询结果数据数组中的第$index个记录的数据的bean对象，默认取第一条
+					<br>参数：$beanClassName 数据库表的Soter_Bean类名称，Soter_Bean规范可以参考“<a href="bean.html">Bean实体</a>”
+					<br>参数：$index   获取查询结果中的第几条，0开始的数字，0是第一条
 					</li>
 				<li><h3 class="title_h2">查询缓存</h3>
 					通过cache方法我们可以十分方便的把我们的查询结果缓存一定的时间。
@@ -555,8 +561,12 @@
 						echo Sr::db()->insertBatch('a', $data);
 						//将输出：INSERT INTO `a` (`name`,`gid`) VALUES (?,?) , (?,?) , (?,?)
 					</pre>
-					<b>提示：执行完批量插入之后，我们通过Sr::db()->lasstId()获取的是这次批量插入数据的第一条数据的ID，
-						<br>后面的ID依次加一，自己可以计算出所有的ID。</b>
+					<b class="text_strong">提示：
+						<br>1.执行完批量插入之后，我们通过Sr::db()->lasstId()获取的是这次批量插入数据的第一条数据的ID，
+						<br>后面的ID依次加一，自己可以计算出所有的ID。
+						<br>2.sqlite批量插入功能，因为sqlite>= 3.7.11(PHP5.5)开始才支持，一次insert多个values，
+						<br>所以sqlite批量插入功能，要求PHP>=5.5的版本，PHP>=5.5的版本的PDO SQLite 版本才>=3.7.11。
+					</b>
 				</li>
 				<li><h3 class="title_h2">更新数据</h3>
 					通过update方法我们可以方便的更新一条数据，第一个参数是表名称，第二个是数据，第三个是where条件。
@@ -620,6 +630,11 @@
 						//		int(100)
 						//	      }
 					</pre>
+					<b class="text_strong">提示：
+						<br>当调用getSql()方法之后，之后如果再进行sql的变化将不会起作用。
+						<br>execute使用的的还是调用getSql()时的sql。
+						<br>也就是说调用getSql()方法之后不应该再进行sql查询改变。
+					</b>
 				</li>
 				<li><h3 class="title_h2">事务</h3>
 					同过begin、commit、rollback三个方法的配合
