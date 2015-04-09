@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Functions函数集合文件</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="js/inc.js"></script>
+	</head>
+	<body>
+		<fieldset>
+                        <legend>Functions函数集合文件</legend>
+                        <ol>
+				<li>
+					<h2 class="title_h2">文件规范</h2>
+                                        
+                                        1.函数文件都放在<code>application/functions</code>文件夹里面
+                                        <br>2.可以在任意地方使用下面的代码加载一个函数文件：
+                                        <br>示例如下：
+                                        <pre class="brush:php">
+                                                Sr::functions('TestFunctions');
+                                        </pre>
+                                        我们可以看到上面有一个参数，这个是什么意思呢，是我们创建函数文件的文件名(不带<b class="text_strong">.php</b>后缀)
+                                        <br>例如:我们要创建函数文件名为UserFunctions.php，那么参数就要输入UserFunctions
+                                        <br>3.如果函数文件在子文件夹下，引用的时候要带上相对路径符号。
+                                        <br>例如：如果你有一个函数文件<code>application/functions/vip/user.php</code>。
+                                        <br>下面的代码可以引用它:
+                                        <pre class="brush:php">
+                                                Sr::functions('vip/user');
+                                        </pre>
+				</li>
+				<li>
+					<h2 class="title_h2">创建自己的函数文件</h2>
+                                        下面我们自定义一个加载函数文件
+                                        <br>1.新建Functions文件application/functions/TestFunctions.php
+                                        <br>2.输入以下代码：
+                                        <pre class="brush:php">
+                                                &lt;?php
+
+                                                function myFunction(){
+                                                        return 'myFunction';
+                                                } 
+                                        </pre>
+                                        3.新建控制器文件application/classes/Controller/Welcome.php
+                                        <br>4.输入以下代码：
+                                        <pre class="brush:php">
+                                                &lt;?php
+
+                                                class Controller_Welcome extends Soter_Controller {
+
+                                                        public function do_functions() {
+                                                                Sr::functions('TestFunctions');
+                                                                echo myFunction();
+                                                        }
+                                                }  
+                                        </pre>                                        
+                                        5.浏览器访问：http://127.0.0.1/index.php/Welcome/functions.do
+                                        <br>//将输出：myFunction
+                                        <br>为什么会输出“<b>myFunction</b>”?
+                                        <br>我们可以从上面例子看Controller_Welcome控制器类，
+                                        <br>在do_functions方法里面做了加载TestFunctions函数文件。
+                                        <br>然后输出TestFunctions函数文件中的myFunction函数,
+                                        <br>所以浏览器才会显示“<b>myFunction</b>”。
+                                </li>
+
+                        </ol>
+                </fieldset>
+		<script src="js/inc.foot.js"></script>
+	</body>
+</html>
