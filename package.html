@@ -78,15 +78,15 @@
 				</li>
 				<li><h2 class="title_h2">注册“包”</h2>
 					一个“包”只有通过入口文件里面注册之后，“包”才能对外提供功能。
-					可以通过入口文件里面的下面配置注册包：
+					<br>可以通过入口文件里面的下面配置注册包：
 					<pre class="brush:php">
 						//注册拓展包
 						->addPackages(array(
 							SOTER_PACKAGES_PATH . 'misc',
 						))
 					</pre>
-					这里SOTER_PACKAGES_PATH的是入口文件里面定义的一个宏变量，
-					<br>为了方便表示路径，自己完全可以修改成其它绝对路径。
+					为了方便表示路径，这里SOTER_PACKAGES_PATH的是入口文件里面定义的一个宏变量，
+					<br>自己完全可以修改成其它绝对路径。
 					<br>addPackages参数是个数组，元素是“包”的路径，注册一个或者多个包，
 					<br>只要把“包的路径”写到这个数组里面就可以了。
 					<br>上面的例子注册了一个misc包。
@@ -98,10 +98,10 @@
 					<br>2、直接new或者Sr::factory()实例化“包”classes目录里面的类，“包”library里面的类。
 					<br>3、Sr::functions()加载“包”functions里面的函数文件
 					<br>提示：
-					<br>在“包”内部，可以通过Sr::config()加载“包”自己的config下面的配置，
-					<br>可以通过Sr::config()加载“包”自己的config下面的配置，
-					<br>可以通过Sr::functions()加载“包”自己的functions下面的函数文件，
-					<br>可以通过Sr::factory()实例化“包”自己classes目录里面的类，“包”自己library里面的类。
+					<br>在“包”内部：
+					<br>1.可以通过Sr::config()加载“包”自己的config下面的配置。
+					<br>2.可以通过Sr::functions()加载“包”自己的functions下面的函数文件。
+					<br>3.可以通过Sr::factory()实例化“包”自己classes目录里面的类，“包”自己library里面的类。
 				</li>
 			</ol>
 		</fieldset>
