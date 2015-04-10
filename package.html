@@ -103,6 +103,23 @@
 					<br>2.可以通过Sr::functions()加载“包”自己的functions下面的函数文件。
 					<br>3.可以通过Sr::factory()实例化“包”自己classes目录里面的类，“包”自己library里面的类。
 				</li>
+				<li><h2 class="title_h2">查找顺序</h2>
+					对于主项目，Hmvc子项目，拓展包，类库。
+					<br>1.类（控制器，模型，类库等）的查找的顺序是：
+					<br>Hmvc子项目[classes->类库classes->拓展包classes->拓展包类库classes]
+					<br>->主项目[classes->类库classes->拓展包classes->拓展包类库classes]
+					<br>2.配置文件,查找的顺序是：
+					<br>Hmvc子项目当前环境配置目录->Hmvc子项目default配置目录
+					<br>->Hmvc子项目类库当前环境配置目录->Hmvc子项目类库default配置目录
+					<br>->Hmvc子项目拓展包当前环境配置目录->Hmvc子项目拓展包default配置目录
+					<br>->主项目当前环境配置目录->主项目default配置目录
+					<br>->主项目类库当前环境配置目录->主项目类库default配置目录
+					<br>->主项目拓展包当前环境配置目录->主项目拓展包default配置目录
+					<br>3.函数文件,查找的顺序是：
+					<br>Hmvc子项目functions目录->Hmvc子项目类库functions目录->Hmvc子项目拓展包functions目录
+					<br>->主项目functions目录->主项目类库functions目录->主项目拓展包functions目录
+					<br><b class="text_strong">所以为了避免了解这么复杂的顺序，保证名称唯一就行了，但是了解了顺序就能合理的利用配置类库等。</b>
+				</li>
 			</ol>
 		</fieldset>
 		<script src="js/inc.foot.js"></script>
