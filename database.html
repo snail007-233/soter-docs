@@ -482,7 +482,7 @@
 					<h3 class="title_h3">9.limit</h3>
 					<pre class="brush:php">
 						echo Sr::db()->select('count('.Sr::db()->wrap('id').') as total,id')->from('c')
-								->limit(0,1');
+								->limit(0,1);
 						//将输出：SELECT count(`id`) as total,`id` FROM `c`  LIMIT 0 , 1
 					</pre>
 
