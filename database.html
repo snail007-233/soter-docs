@@ -564,7 +564,7 @@
 					<b class="text_strong">提示：
 						<br>1.执行完批量插入之后，我们通过Sr::db()->lasstId()获取的是这次批量插入数据的第一条数据的ID，
 						<br>后面的ID依次加一，自己可以计算出所有的ID。
-						<br>2.sqlite批量插入功能，因为sqlite>= 3.7.11(PHP5.5)开始才支持，一次insert多个values，
+						<br>2.关于sqlite批量插入功能，因为sqlite>= 3.7.11(PHP5.5)开始才支持一次insert多个values，
 						<br>所以sqlite批量插入功能，要求PHP>=5.5的版本，PHP>=5.5的版本的PDO SQLite 版本才>=3.7.11。
 					</b>
 				</li>
