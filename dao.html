@@ -157,12 +157,12 @@
                                                         //这里我们做一个简单查询，详细可以查看“数据库手册”的“查询数据”和“查询结果集的使用”
                                                         public function getUserName(){
                                                                 $table = $this->getTable();
-                                                                $sql = Sr::db()->select('username')
+                                                                $username = Sr::db()->select('username')
                                                                                 ->from($table)
                                                                                 ->limit(0,1)
                                                                                 ->execute()
                                                                                 ->value('username');
-                                                                return $sql;
+                                                                return $username;
                                                         }
 
                                                 }
