@@ -502,12 +502,12 @@
 					<br>作用：得到查询结果数据数组中的某一字段的一维数组
 					<br>参数：$columnName   字段名称
 					<br>4.<b>value</b>($columnName, $default = null, $index = null)
-					<br>作用：得到查询结果数据数组中的第$index条记录的
+					<br>作用：得到查询结果数据数组中的第$index条记录的$columnName字段的值
 					<br>参数：$columnName   字段名称
 					<br>5.<b>key</b>($columnName)
 					<br>作用：设置使用哪个字段的值作为返回的结果集数组的键
 					<br>参数：$columnName   字段名称
-					<br>比如我们查询用户信息，设置返回的数据键值不是0开始的数字，而是用户id，
+					<br>比如我们查询用户信息，设置返回的二维数据，需要一维数组键值不是0开始的数字，而是用户id，
 					<br>我们可以这样查询
 					<pre class="brush:php">
 						$rows=Sr::db()->select('*')->from('user')->execute()->key('user_id')->rows();
