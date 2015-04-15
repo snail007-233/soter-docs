@@ -12,20 +12,122 @@
 			<ol>
                                 <li>
                                         <h2 class="title_h2">什么是Bean</h2>
-                                        Bean是一种思想，Bean我们可以想象成数据库其中一条数据进行处理。
+                                        Bean我们可以想成数据表其中一行数据进行处理与获取。
                                         <br>相信大家如果有看Dao层文档，就会想Dao不是已经处理数据库，为什么我们还要弄个Bean呢？
-                                        <br>因为为了提高我们的程序的易扩展性高可维护性和灵活性，我们再弄一个Bean可以来降低了业务耦合度，降低了软件的复杂度，增强了可维护性。 
-                                        <br>那么我们又有问题了，哪里来降低了业务耦合度？
+                                        <br>因为Dao是处理表，而Bean是对表某一行数据进行处理和获取。
+                                        <br>所以我们对数据库处理分成Bean和Dao作用于一个Bean代表数据表的一行数据，一个Dao代表一个表。
                                         <br>示例如下：
-                                        <br>比如：我们有个<code>user</code>表里面有<code>addtime</code>（<b>存时间戳</b>），
-                                        <br>在没有Bean情况我们是不是要在Dao文件读取<code>user</code>表里面的<code>addtime</code>字段将取出来在进行时间戳转换成时间。
-                                        <br>现在我们可以创建Bean文件在里面写个<code>setAddTime</code>函数(<b>下面我们会详细介绍</b>)里面进行时间戳转化，
-                                        <br>然后我们在Dao文件select查询调用<code>objects</code>方法(详细可以查看<a href="database.html">数据库手册</a>的"<b>查询结果集的使用</b>")来读取我们创建Bean文件，这样一来就降低了业务耦合度。
-                                        <br>
-                                        <b class="text_strong">
-                                                提示：
-                                                <br>一个bean代表数据表的一行数据，一个dao代表一个表
-                                        </b>
+                                        <br>比如：我们有个<code>users</code>表里面有<code>addtime</code>（<b>存时间戳</b>），
+                                        <br>在没有Bean情况我们是不是要在Dao文件读取<code>users</code>表里面的<code>addtime</code>字段将取出来在进行时间戳转换成时间。
+                                        <br>代码如下:
+                                        <br>1.新建Dao文件application/classes/Dao/Users.php
+                                        <pre class="brush:php">
+                                                class Dao_User extends Soter_Dao {
+                                                        
+                                                        public function getTable(){
+                                                                return 'id';
+                                                        }
+
+                                                        public function getPrimaryKey(){
+                                                                return 'users';
+                                                        }
+
+                                                        public function getColumns(){
+                                                                return array(
+                                                                                'id'//标识
+                                                                                ,'username'//用户名
+                                                                                ,'addtime'//添加时间
+                                                                                );
+                                                        }
+
+                                                        public function getAddTime(){
+                                                                $table = $this->getTable();
+                                                                $addtime = Sr::db()->select('addtime')
+                                                                                ->from($table)
+                                                                                ->limit(0,1)
+                                                                                ->execute()
+                                                                                ->value('addtime');
+                                                                $addtime = date('Y-m-d H:i:s', $addtime);
+                                                                return $addtime;
+                                                        }
+                                                }
+                                        </pre>
+                                        现在我们可以创建Bean文件在里面写个<code>setAddtime</code>函数(<b>下面我们会详细介绍</b>)里面进行时间戳转化，
+                                        <br>然后我们在Dao文件select查询调用<code>objects</code>方法(详细可以查看<a href="database.html">数据库手册</a>的"<b>查询结果集的使用</b>")来读取我们创建Bean文件。
+                                        <br>代码如下:
+                                        <br>1.新建Dao文件application/classes/Bean/Users.php
+                                        <pre class="brush:php">
+                                                class Bean_Users extends Soter_Bean {
+                                                        //标识
+                                                        private $id;
+
+                                                        //用户名
+                                                        private $username;
+
+                                                        //添加时间
+                                                        private $addtime;
+
+                                                        public function getId() {
+                                                                return $this->id;
+                                                        }
+
+                                                        public function setId($id) {
+                                                                $this->id = $id;
+                                                                return $this;
+                                                        }
+
+                                                        public function getUsername() {
+                                                                return $this->username;
+                                                        }
+
+                                                        public function setUsername($username) {
+                                                                $this->username = $username;
+                                                                return $this;
+                                                        }
+
+                                                        public function getAddtime() {
+                                                                return $this->age;
+                                                        }
+
+                                                        public function setAddtime($addtime) {
+                                                                $this->addtime = date('Y-m-d H:i:s', $addtime);
+                                                                return $this;
+                                                        }
+                                                }
+                                        </pre>
+                                        2.新建Dao文件application/classes/Dao/Users.php
+                                        <pre class="brush:php">
+                                                class Dao_User extends Soter_Dao {
+                                                        
+                                                        public function getTable(){
+                                                                return 'id';
+                                                        }
+
+                                                        public function getPrimaryKey(){
+                                                                return 'users';
+                                                        }
+
+                                                        public function getColumns(){
+                                                                return array(
+                                                                                'id'//标识
+                                                                                ,'username'//用户名
+                                                                                ,'addtime'//添加时间
+                                                                                );
+                                                        }
+
+                                                        public function getAddTime(){
+                                                                $table = $this->getTable();
+                                                                $addtime = Sr::db()->select('addtime')
+                                                                                ->from($table)
+                                                                                ->limit(0,1)
+                                                                                ->execute()
+                                                                                ->objects('Users');
+                                                                return $addtime->getAddtime();
+                                                        }
+                                                }
+                                        </pre>
+                                        从上面代码看可以降低了软件的复杂度，增强了可维护性。
+                                        <br><b class="text_strong">提示：</b>
                                         <br>了解详细的Dao层,点击进入<a href="dao.html">Dao层</a>
                                         
                                 </li>
