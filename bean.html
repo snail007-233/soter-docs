@@ -12,12 +12,12 @@
 			<ol>
                                 <li>
                                         <h2 class="title_h2">什么是Bean</h2>
-                                        Bean我们可以想成数据表其中一行数据进行处理与获取。
-                                        <br>相信大家如果有看Dao层文档，就会想Dao不是已经处理数据库，为什么我们还要弄个Bean呢？
+                                        Bean我们可以想成数据表其中一行数据，代表就意味处理与获取。
+                                        <br>相信大家如果有看Dao层文档，就会想Dao不是已经处理表数据，为什么我们还要弄个Bean呢？
                                         <br>因为Dao是处理表，而Bean是对表某一行数据进行处理和获取。
                                         <br>所以我们对数据库处理分成Bean和Dao作用于一个Bean代表数据表的一行数据，一个Dao代表一个表。
                                         <br>示例如下：
-                                        <br>比如：我们有个<code>users</code>表里面有<code>addtime</code>（<b>存时间戳</b>），
+                                        <br>比如：我们有个<code>users</code>表里面有<code>addtime</code>字段，类型是时间戳，
                                         <br>在没有Bean情况我们是不是要在Dao文件读取<code>users</code>表里面的<code>addtime</code>字段将取出来在进行时间戳转换成时间。
                                         <br>代码如下:
                                         <br>1.新建Dao文件application/classes/Dao/Users.php
@@ -25,11 +25,11 @@
                                                 class Dao_User extends Soter_Dao {
                                                         
                                                         public function getTable(){
-                                                                return 'id';
+                                                                return 'users';                                                                
                                                         }
 
                                                         public function getPrimaryKey(){
-                                                                return 'users';
+                                                                return 'id';
                                                         }
 
                                                         public function getColumns(){
@@ -53,7 +53,7 @@
                                                 }
                                         </pre>
                                         现在我们可以创建Bean文件在里面写个<code>setAddtime</code>函数(<b>下面我们会详细介绍</b>)里面进行时间戳转化，
-                                        <br>然后我们在Dao文件select查询调用<code>objects</code>方法(详细可以查看<a href="database.html">数据库手册</a>的"<b>查询结果集的使用</b>")来读取我们创建Bean文件。
+                                        <br>然后我们在Dao文件select查询调用<code>object</code>方法(详细可以查看<a href="database.html">数据库手册</a>的"<b>查询结果集的使用</b>")来读取我们创建Bean文件。
                                         <br>代码如下:
                                         <br>1.新建Dao文件application/classes/Bean/Users.php
                                         <pre class="brush:php">
@@ -86,7 +86,7 @@
                                                         }
 
                                                         public function getAddtime() {
-                                                                return $this->age;
+                                                                return $this->addtime;
                                                         }
 
                                                         public function setAddtime($addtime) {
@@ -100,11 +100,11 @@
                                                 class Dao_User extends Soter_Dao {
                                                         
                                                         public function getTable(){
-                                                                return 'id';
+                                                                return 'users';                                                                
                                                         }
 
                                                         public function getPrimaryKey(){
-                                                                return 'users';
+                                                                return 'id';
                                                         }
 
                                                         public function getColumns(){
@@ -121,7 +121,7 @@
                                                                                 ->from($table)
                                                                                 ->limit(0,1)
                                                                                 ->execute()
-                                                                                ->objects('Users');
+                                                                                ->object('Users');
                                                                 return $addtime->getAddtime();
                                                         }
                                                 }
