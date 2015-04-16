@@ -13,9 +13,8 @@
                                 <li>
                                         <h2 class="title_h2">什么是Bean</h2>
                                         Bean我们可以想成数据表的一行数据在代码中的一个实体。
-                                        <br>相信大家如果有看Dao层文档，就会想Dao不是已经处理表数据，那么为什么我们还要弄个Bean呢？
-                                        <br>因为Dao是处理表，而Bean是对表某一行数据进行处理和获取。
-                                        <br>所以我们对数据库处理分成Bean和Dao作用于一个Bean代表数据表的一行数据，一个Dao代表一个表。
+                                        <br>Bean与Dao区别:
+                                        <br>Dao是处理表，而Bean是对表某一行数据进行处理和获取,一个Bean文件代表数据表的一行数据，一个Dao文件代表一个表。
                                         <br>示例如下：
                                         <br>比如：我们有个<code>users</code>表里面有<code>addtime</code>字段，类型是时间戳，
                                         <br>1.在没有Bean情况我们是不是要在Dao文件读取<code>users</code>表里面的<code>addtime</code>字段将取出来在进行时间戳转换成时间。
