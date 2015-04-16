@@ -12,15 +12,15 @@
 			<ol>
                                 <li>
                                         <h2 class="title_h2">什么是Bean</h2>
-                                        Bean我们可以想成数据表其中一行数据，代表就意味处理与获取。
-                                        <br>相信大家如果有看Dao层文档，就会想Dao不是已经处理表数据，为什么我们还要弄个Bean呢？
+                                        Bean我们可以想成数据表其中一行数据，就意味处理与获取。
+                                        <br>相信大家如果有看Dao层文档，就会想Dao不是已经处理表数据，那么为什么我们还要弄个Bean呢？
                                         <br>因为Dao是处理表，而Bean是对表某一行数据进行处理和获取。
                                         <br>所以我们对数据库处理分成Bean和Dao作用于一个Bean代表数据表的一行数据，一个Dao代表一个表。
                                         <br>示例如下：
                                         <br>比如：我们有个<code>users</code>表里面有<code>addtime</code>字段，类型是时间戳，
-                                        <br>在没有Bean情况我们是不是要在Dao文件读取<code>users</code>表里面的<code>addtime</code>字段将取出来在进行时间戳转换成时间。
+                                        <br>1.在没有Bean情况我们是不是要在Dao文件读取<code>users</code>表里面的<code>addtime</code>字段将取出来在进行时间戳转换成时间。
                                         <br>代码如下:
-                                        <br>1.新建Dao文件application/classes/Dao/Users.php
+                                        <br>1.1.新建Dao文件application/classes/Dao/Users.php
                                         <pre class="brush:php">
                                                 class Dao_User extends Soter_Dao {
                                                         
@@ -52,10 +52,10 @@
                                                         }
                                                 }
                                         </pre>
-                                        现在我们可以创建Bean文件在里面写个<code>setAddtime</code>函数里面进行时间戳转化，
-                                        <br>然后我们在Dao文件select查询调用<code>object</code>方法(详细可以查看<a href="database.html">数据库手册</a>的"<b>查询结果集的使用</b>")来读取我们创建Bean文件。
+                                        2.现在我们可以创建Bean文件在里面写个<code>setAddtime</code>函数里面进行时间戳转化，
+                                        <br>然后我们在Dao文件select查询调用<code>object</code>方法(详细可以查看<a href="database.html">数据库手册</a>的<b>查询结果集的使用</b>)来读取我们创建Bean文件。
                                         <br>代码如下:
-                                        <br>1.新建Bean文件application/classes/Bean/Users.php
+                                        <br>2.1.新建Bean文件application/classes/Bean/Users.php
                                         <pre class="brush:php">
                                                 class Bean_Users extends Soter_Bean {
                                                         //标识
@@ -86,16 +86,17 @@
                                                         }
 
                                                         public function getAddtime() {
+                                                                $this->addtime = date('Y-m-d H:i:s', $addtime);
                                                                 return $this->addtime;
                                                         }
 
                                                         public function setAddtime($addtime) {
-                                                                $this->addtime = date('Y-m-d H:i:s', $addtime);
+                                                                $this->addtime = $addtime;
                                                                 return $this;
                                                         }
                                                 }
                                         </pre>
-                                        2.新建Dao文件application/classes/Dao/Users.php
+                                        2.2.新建Dao文件application/classes/Dao/Users.php
                                         <pre class="brush:php">
                                                 class Dao_User extends Soter_Dao {
                                                         
@@ -219,7 +220,7 @@
                                                         
                                                         public function do_objects() {
                                                                 $user = Sr::db()->select('*')->from('users')->execute()->objects('Users');
-                                                                var_dump($user);
+                                                                Sr::dump($user);
                                                         }
                                                 } 
                                         </pre>
@@ -265,7 +266,7 @@
                                                         ),
                                                 ),
                                         </pre>
-                                        详细请看<a href="database.html">数据库手册</a>的“数据库配置信息说明” 
+                                        详细请看<a href="database.html">数据库手册</a>的“<b>数据库配置信息说明</b>” 
                                         <br>7.新建Bean文件application/classes/Bean/User.php
                                         <br>8.输入以下代码：
                                         <pre class="brush:php">
@@ -301,11 +302,12 @@
                                                         }
 
                                                         public function getAddtime() {
+                                                                $this->addtime = date('Y-m-d H:i:s', $addtime);
                                                                 return $this->addtime;
                                                         }
 
                                                         public function setAddtime($addtime) {
-                                                                $this->addtime = date('Y-m-d H:i:s', $addtime);
+                                                                $this->addtime = $addtime;
                                                                 return $this;
                                                         }
                                                 }
