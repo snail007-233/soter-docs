@@ -362,6 +362,13 @@
                                         </pre>
                                         13.浏览器访问：http://127.0.0.1/index.php/Welcome/dao.do 
                                         <br>//将输出：2014-12-31 17:00:00
+                                        <br>为什么会输出“<b>2014-12-31 17:00:00</b>”?
+                                        <br>我们可以从上面例子看Controller_Welcome控制器类，
+                                        <br>在do_dao方法里面做了加载Dao层中的<code>Dao_User</code>类赋值给<b>$dao</b>。
+                                        <br>通过<b>$dao</b>输出<code>Dao_User</code>类中的getAddTime方法,getAddTime方法做简单的查询。
+                                        <br>在去调用Bean实体中的<code>Bean_User</code>类赋值给<b>$addtime</b>.
+                                        <br>最后通过<b>$addtime</b>变量去调用<code>getAddtime</code>方法,<code>getAddtime</code>方法把<code>addtime</code>字段转成时间。
+                                        <br>所以浏览器才会显示“<b>2014-12-31 17:00:00</b>”。
                                 </li>
 			</ol>
 		</fieldset>
