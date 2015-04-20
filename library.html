@@ -13,10 +13,7 @@
                                 <li>
                                         <h2 class="title_h2">第三方类库规范</h2>
                                         1.第三方类库文件都放在<code>application/library/classes</code>文件夹里面
-                                        <br>2.文件名每个单词首字母大写. 例如:<code>MyClass.php</code>
-                                        <br>3.类声明每个单词首字母大写. 例如:<code>class MyClass</code>
-                                        <br>4.方法驼峰命名法. 例如:<code>public function testLibrary()</code>
-                                        <br>5.<b class="text_strong">类的名字和文件名应相同.</b>
+                                        <br>2.<b class="text_strong">文件名和类名一样，大小写敏感。</b>
                                         <br>示例如下：
                                         <br>1.新建类库文件application/library/classes/MyClass.php
                                         <br>2.输入以下代码：
@@ -37,6 +34,8 @@
                                         <br>示例如下：
                                         <pre class="brush:php">
                                                 Sr::library('MyClass');
+                                                //我们也可以直接用new如下
+                                                new MyClass();
                                         </pre>
                                         我们可以看到上面有一个参数，这个是第三方类库的<b>文件名</b>。
                                 </li>
@@ -47,19 +46,6 @@
                                         <br>那么要加载第三方类库如下:
                                         <pre class="brush:php">
                                                 Sr::library('MyClass');
-                                        </pre>
-                                </li>
-                                <li>
-                                        <h2 class="title_h2">示例二</h2>
-                                        比如有文件：application/library/classes/Test/AreaClass.php
-                                        <br>那么AreaClass.php文件里面的类名就应该是：Test_AreaClass,也就是下划线代表着文件夹的分隔符。
-                                        <br>那么要加载第三方类库如下:
-                                        <pre class="brush:php">
-                                                Sr::library('Test_AreaClass');
-                                                //还有另一种方式例如以下
-                                                Sr::library('Test/AreaClass.php');
-                                                //我们也可以不用带.php后缀,例如以下：
-                                                Sr::library('Test/AreaClass');
                                         </pre>
                                 </li>
                                 <li>
