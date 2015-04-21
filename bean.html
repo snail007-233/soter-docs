@@ -87,8 +87,7 @@
                                                         }
 
                                                         public function getAddtime() {
-                                                                $this->addtime = date('Y-m-d H:i:s', $addtime);
-                                                                return $this->addtime;
+                                                                return date('Y-m-d H:i:s', $this->addtime);
                                                         }
 
                                                         public function setAddtime($addtime) {
@@ -119,16 +118,16 @@
 
                                                         public function getAddTime(){
                                                                 $table = $this->getTable();
-                                                                $addtime = Sr::db()->select('addtime')
+                                                                $users = Sr::db()->select('addtime')
                                                                                 ->from($table)
                                                                                 ->limit(0,1)
                                                                                 ->execute()
                                                                                 ->object('Users');
-                                                                return $addtime->getAddtime();
+                                                                return $users->getAddtime();
                                                         }
                                                 }
                                         </pre>
-                                        从上面代码看可以降低了软件的复杂度，增强了可维护性。
+                                        从上面代码可以看到使用bean+dao模式，降低了程序的复杂度和耦合度，增强了可维护性。 
                                         <br><b class="text_strong">提示：</b>
                                         <br>了解详细的Dao层,点击进入<a href="dao.html">Dao层</a>
                                         
@@ -218,11 +217,11 @@
                                                         }
 
                                                         public function getAddtime() {
-                                                                return $this->addtime;
+                                                                return date('Y-m-d H:i:s', $this->addtime);
                                                         }
 
                                                         public function setAddtime($addtime) {
-                                                                $this->addtime = date('Y-m-d H:i:s', $addtime);
+                                                                $this->addtime = $addtime;
                                                                 return $this;
                                                         }
                                                 }
@@ -321,8 +320,7 @@
                                                         }
 
                                                         public function getAddtime() {
-                                                                $this->addtime = date('Y-m-d H:i:s', $addtime);
-                                                                return $this->addtime;
+                                                                return date('Y-m-d H:i:s', $this->addtime);
                                                         }
 
                                                         public function setAddtime($addtime) {
