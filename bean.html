@@ -264,10 +264,10 @@
                                                         PRIMARY KEY (`id`)
                                                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-                                                INSERT INTO `users` VALUES ('1', '刘一', '1420041600');
-                                                INSERT INTO `users` VALUES ('2', '陈二', '1422806400');
-                                                INSERT INTO `users` VALUES ('3', '张三', '1425312000');
-                                                INSERT INTO `users` VALUES ('4', '李四', '1428076800');
+                                                INSERT INTO `user` VALUES ('1', '刘一', '1420041600');
+                                                INSERT INTO `user` VALUES ('2', '陈二', '1422806400');
+                                                INSERT INTO `user` VALUES ('3', '张三', '1425312000');
+                                                INSERT INTO `user` VALUES ('4', '李四', '1428076800');
                                         </pre>
                                         5.修改数据库配置文件application/config/default/database.php 
                                         <br>6.修改一下代码
@@ -320,6 +320,7 @@
                                                         }
 
                                                         public function getAddtime() {
+                                                                date_default_timezone_set('Asia/Shanghai');
                                                                 return date('Y-m-d H:i:s', $this->addtime);
                                                         }
 
@@ -355,12 +356,12 @@
                                                         //这里我们做一个简单查询，详细可以查看“数据库手册”的“查询数据”和“查询结果集的使用”
                                                         public function getAddTime(){
                                                                 $table = $this->getTable();
-                                                                $addtime = Sr::db()->select('*')
+                                                                $user = Sr::db()->select('*')
                                                                                 ->from($table)
                                                                                 ->limit(0,1)
                                                                                 ->execute()
                                                                                 ->object('User');
-                                                                return $addtime->getAddtime();
+                                                                return $user->getAddtime();
                                                         }
 
                                                 }
@@ -379,14 +380,14 @@
                                                 }  
                                         </pre>
                                         13.浏览器访问：http://127.0.0.1/index.php/Welcome/dao.do 
-                                        <br>//将输出：2014-12-31 17:00:00
-                                        <br>为什么会输出“<b>2014-12-31 17:00:00</b>”?
+                                        <br>//将输出：2015-01-01 00:00:00
+                                        <br>为什么会输出“<b>2015-01-01 00:00:00</b>”?
                                         <br>我们可以从上面例子看Controller_Welcome控制器类，
                                         <br>在do_dao方法里面做了加载Dao层中的<code>Dao_User</code>类赋值给<b>$dao</b>。
                                         <br>通过<b>$dao</b>输出<code>Dao_User</code>类中的getAddTime方法,getAddTime方法做简单的查询。
-                                        <br>在去调用Bean实体中的<code>Bean_User</code>类赋值给<b>$addtime</b>.
-                                        <br>最后通过<b>$addtime</b>变量去调用<code>Bean_User</code>类中<code>getAddtime</code>方法,<code>getAddtime</code>方法把<code>addtime</code>字段转成时间。
-                                        <br>所以浏览器才会显示“<b>2014-12-31 17:00:00</b>”。
+                                        <br>在去调用Bean实体中的<code>Bean_User</code>类赋值给<b>$user</b>.
+                                        <br>最后通过<b>$user</b>变量去调用<code>Bean_User</code>类中<code>getAddtime</code>方法,<code>getAddtime</code>方法把<code>$this->addtime</code>属性转成时间。
+                                        <br>所以浏览器才会显示“<b>2015-01-01 00:00:00</b>”。
                                 </li>
 			</ol>
 		</fieldset>

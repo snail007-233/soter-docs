@@ -43,12 +43,12 @@
                                         使用示例：
                                         <pre class="brush:php">
                                                 //首先模拟一个表单代码如下：
-                                                <form action="http://127.0.0.1/index.php/Welcome/index.do" method="post">
+                                                &lt;form action="http://127.0.0.1/index.php/Welcome/index.do" method="post"&gt;
                                                         用户名:<input type="text" name="username" value="用户名" />
                                                         姓名:<input type="text" name="names" value="word" />
                                                         兴趣:<input type="text" name="hobby" value="" />
                                                         <input type="submit" value="提交" />
-                                                </form>
+                                                &lt;/form&gt;
 
                                                 //假如你表单点击提交
                                                 echo Sr::post('username');
@@ -72,12 +72,12 @@
                                         使用示例：
                                         <pre class="brush:php">
                                                 //首先模拟一个表单代码如下：
-                                                <form action="http://127.0.0.1/index.php/Welcome/index.do?username=get数据" method="post">
+                                                &lt;form action="http://127.0.0.1/index.php/Welcome/index.do?username=get数据" method="post"&gt;
                                                         用户名:<input type="text" name="username" value="用户名" />
                                                         姓名:<input type="text" name="names" value="word" />
                                                         兴趣:<input type="text" name="hobby" value="" />
                                                         <input type="submit" value="提交" />
-                                                </form>
+                                                &lt;/form&gt;
 
                                                 //假如你表单点击提交
                                                 echo Sr::getPost('username');
@@ -103,12 +103,12 @@
                                         使用示例：
                                         <pre class="brush:php">
                                                 //首先模拟一个表单代码如下：
-                                                <form action="http://127.0.0.1/index.php/Welcome/index.do?username=get数据" method="post">
+                                                &lt;form action="http://127.0.0.1/index.php/Welcome/index.do?username=get数据" method="post"&gt;
                                                         用户名:<input type="text" name="username" value="用户名" />
                                                         姓名:<input type="text" name="names" value="word" />
                                                         兴趣:<input type="text" name="hobby" value="" />
                                                         <input type="submit" value="提交" />
-                                                </form>
+                                                &lt;/form&gt;
 
                                                 //假如你表单点击提交
                                                 echo Sr::postGet('username');
@@ -214,6 +214,23 @@
                                                 //你肯定看到了，又多了第三个参数，它又是什么意思呢，
                                                 //如果我们获取的参数内容有可能是html的时候，我们应该对它进行xss过滤，没错,第三个参数设置为true的时候，
                                                 //Sr::session()会帮你对参数值进行xss安全过滤。
+                                        </pre>
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">获取原始的POST数据</h2>
+                                        通过<b>Sr::postRawBody()</b>方法;我们可以方便的获取原始的POST数据。 
+                                        <br>使用示例：
+                                        <pre class="brush:php"> 
+                                        //首先模拟一个表单代码如下：
+                                        &lt;form action="http://127.0.0.1/index.php/Welcome/index.do" method="post"&gt;
+                                                用户名:<input type="text" name="username" value="Jackson">
+                                                姓名:<input type="text" name="names" value="word">
+                                                <input type="submit" value="提交">
+                                        &lt;/form&gt;
+
+                                        //假如你表单点击提交
+                                        echo Sr::postRawBody();
+                                        //上面将会输出:username=Jackson&names=word 
                                         </pre>
                                 </li>
                         </ol>
