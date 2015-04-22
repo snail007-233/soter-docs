@@ -1,15 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>HMVC</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="js/inc.js"></script>
-    </head>
-    <body>
-        <fieldset>
-	    <legend>HMVC</legend>
-        </fieldset>
-        <script src="js/inc.foot.js"></script>
-    </body>
+	<head>
+		<title>HMVC</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="js/inc.js"></script>
+	</head>
+	<body>
+		<fieldset>
+			<legend>HMVC</legend>
+			<ol>
+				<li><h2 class="title_h2">HMVC简介</h2>
+					HMVC（Hierarchical-Model-View-Controller），也可以叫做 Layered MVC。
+					<br/>顾名思义，就是按等级划分的 MVC 模式，简单的解释就是把MVC又细分成了多个子 MVC，
+					<br/>每个模块就分成一个 MVC。使用 HMVC 的好处就是可以降低各个功能模块之间的耦合性，
+					<br/>提高代码复用性，使得每个功能都可以独立出来，每个模块都有自己的 MVC 结构。
+
+
+				</li>
+				<li><h2 class="title_h2">HMVC结构</h2>
+					Soter的hvmc子模块默认都在application/hmvc目录里面，一个模块一个目录。如果我们要启用一个
+					<br/>hmvc模块，我们需要在入口文件index.php里面修改下面的配置：
+					<pre class="brush:php">
+						//注册hmvc模块，数组键是uri里面的hmvc模块名称，值是hmvc模块文件夹名称
+						->setHmvcModules(array(
+							// 'Demo' => 'demo'
+						))
+					</pre>
+					可以看到数组里面<b>键</b>是我们访问hmvc模块的时候<b class="text_strong">URL里面</b>的hmvc模块名称，
+					<br/><b>值</b>是hmvc模块的<b class="text_strong">文件夹名称</b>。
+					<h3 class="title_h3">1.Soter的HMVC目录结构</h3>
+					<pre>
+application
+	|- classes
+		|- Controller
+			|- controllers.php
+		|- Model
+			|- models.php
+		|- ...
+	|- views
+		|- index.php
+		|- footer.php
+		|- ...
+	|- hmvc
+		|- hmvc_module1
+			|- classes
+				|- Controller
+					|- controllers.php
+				|- Model
+					|- models.php
+				|- ...
+			|- views
+				|- index.php
+				|- footer.php
+				|- ...
+		|- hmvc_module2
+			|- classes
+				|- Controller
+					|- controllers.php
+				|- Model
+					|- models.php
+				|- ...
+			|- views
+				|- index.php
+				|- footer.php
+				|- ...
+		|- ....
+					</pre>
+				</li>
+
+			</ol>
+		</fieldset>
+		<script src="js/inc.foot.js"></script>
+	</body>
 </html>
