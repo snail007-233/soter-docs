@@ -25,17 +25,18 @@
                                 <li>
                                         <h2 class="title_h2">传递数据</h2>
                                         比如：
-                                        <br>数据<code>$data = array('title' => '首页')</code>,然后可以在加载视图的时候通过传递第二个参数将数据传递给视图。
+                                        <br>数据<code>$data = array('title' => '首页')</code>,然后可以在加载视图的时候通过以下三种方法将数据传递给视图。
                                         <pre class="brush:php">
+                                        //1.通过load第二个参数
                                         Sr::view()->load('index', $data);
-                                        //也可以用另一种方式例如以下
+                                        //2.通过set方法
                                         Sr::view()->set($data)->load('index');
-                                        //还有另一种方式例如以下
+                                        //3.通过add方法
                                         Sr::view()->add('title', '首页');
                                         Sr::view()->load('index');
                                         </pre>
                                         然后在视图文件里面就可以使用<code>$title</code>变量了。
-                                        <br>以上三种方法可以让视图获取<code>$title</code>变量，他们的优先级是：<b>第二个参数</b> > <code>->set()</code> > <code>->add()</code>
+                                        <br>以上三种方法他们的优先级是：<b>第二个参数</b> > <code>->set()</code> > <code>->add()</code>
                                 </li>
                                 <li>
                                         <h2 class="title_h2">返回视图内容</h2>
@@ -45,13 +46,13 @@
                                 </li>
                                 <li>
                                         <h2 class="title_h2">包含其它视图</h2>
-                                        在视图中可以包含其他视图文件,视图可以通过<code>Sr::view()->load($view_name)</code>加载。
+                                        在视图中可以包含其他视图文件,视图文件里面可以通过<code>Sr::view()->load($view_name)</code>加载。
                                         <br>比如：
                                         <br>在视图index.php里面有如下内容：
                                         <pre class="brush:php">
                                                 &lt;?php Sr::view()->load('common/header'); ?&gt;
                                         </pre>
-                                        那么这个就是包含视图目录下面的common文件夹里面的headerphp视图文件。 
+                                        那么这个就是包含视图目录下面的common文件夹里面的header.php视图文件。 
                                 </li>
                                 <li>
                                         <h2 class="title_h2">创建自己的视图</h2>
