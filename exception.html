@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>异常处理</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="js/inc.js"></script>
+	</head>
+	<body>
+		<fieldset>
+			<legend>异常处理</legend>
+			<ol>
+				<li><h2 class="title_h2">Soter异常概念</h2>
+					在Soter里面，把PHP的notice，warnning，fatal等错误以及各种exception异常统称为“异常”。
+					<br>Soter一旦发生了“异常”，代码就会终止运行。
+				</li>
+				<li><h2 class="title_h2">异常处理</h2>
+					默认情况下，Soter一旦发生了“异常”，代码就会终止运行，并显示出错误信息在浏览器中。
+					<h3 class="title_h3">1.默认处理</h3>
+					在入口文件里面我们可以看到下面自定义的错误显示控制处理类的配置：
+					<pre class="brush:php">
+						//系统错误显示设置，非产品环境才显示
+						->setShowError(Sr::config()->getEnvironment() != Sr::ENV_PRODUCTION)
+						...
+						//设置自定义的错误显示控制处理类
+						->setExceptionHandle(new Soter_Exception_Handle_Default())
+					</pre>
+					Soter_Exception_Handle_Default类代码如下：
+					<pre class="brush:php">
+						class Soter_Exception_Handle_Default implements Soter_Exception_Handle {
+							public function handle(Soter_Exception $exception) {
+								$exception->render();
+							}
+						}
+					</pre>
+					可以看到，默认情况下，Soter_Exception_Handle_Default类在handle方法里面
+					<br>直接调用了Soter_Exception异常对象$exception的render方法向浏览器输出了错误信息。
+					<br>如果我们不想显示这个错误信息，我看可以通过在入口文件里面通过设置showError为false，
+					<br>就会关闭错误信息在浏览器中的显示。
+					<h3 class="title_h3">2.自定义处理</h3>
+					如果我们想自己控制这个错误信息的显示怎么办呢，我们只需要通过setExceptionHandle设置自己的异常处理类即可。
+					<br>异常处理类都必须实现Soter_Exception_Handle接口，也就是要有一个handle方法接收一个Soter_Exception参数。
+					<br>比如：
+					<pre class="brush:php">
+						class My_Exception_Handle implements Soter_Exception_Handle {
+							public function handle(Soter_Exception $exception) {
+								echo '404';
+							}
+						}
+					</pre>
+					上面我们自定义类一个异常处理类My_Exception_Handle，实现了handle方法，在方法里面直接显示404，
+					<br>那么当我们showError为true的时候，只要发生了异常，页面就会显示404。
+					<br><b class="text_strong">注意：只有showError为true的时候，用户用户自定义类错误显示处理类或系统错误显示处理类才会被调用。</b>
+					<br>1.当设置了自定义类错误显示处理类，系统错误显示处理类不再起作用，是否显示错误由用户自定义类处理。
+					<br>2.当没有设置自定义类错误显示处理类，系统错误显示处理类显示错误。
+				</li>
+				<li><h2 class="title_h2">异常日志记录</h2>
+					当发生了异常我们可以通过注册日志记录类，来记录异常信息到数据库，到文件等等。
+					<br>在入口文件里面我们可以看到下面错误日志类相关配置：
+					<pre class="brush:php">
+						//错误日志记录，注释掉这行会关闭日志记录，去掉注释则开启日志文件记录
+						->addLoggerWriter(new Soter_Logger_FileWriter(SOTER_APP_PATH . 'storage/logs/'))
+						//设置日志记录子目录格式，参数就是date()函数的第一个参数,默认是 Y-m-d/H
+						->setLogsSubDirNameFormat('Y-m-d/H')
+					</pre>
+				</li>
+			</ol>
+		</fieldset>
+		<script src="js/inc.foot.js"></script>
+	</body>
+</html>
