@@ -26,17 +26,38 @@
                                         <h2 class="title_h2">传递数据</h2>
                                         比如：
                                         <br>数据<code>$data = array('title' => '首页')</code>,然后可以在加载视图的时候通过以下三种方法将数据传递给视图。
+                                        <h3 class="title_h3">1.直接data传递</h3>
+                                        如下：
                                         <pre class="brush:php">
-                                        //1.通过load第二个参数
                                         Sr::view()->load('index', $data);
-                                        //2.通过set方法
+                                        </pre>
+                                        <h3 class="title_h3">2.直接set传递</h3>
+                                        如下：
+                                        <pre class="brush:php">
                                         Sr::view()->set($data)->load('index');
-                                        //3.通过add方法
-                                        Sr::view()->add('title', '首页');
+                                        //还有另一种方式如下
+                                        Sr::view()->set('title', 'set首页')->load('index');
+                                        //也是可以用以下方式
+                                        Sr::view()->set('title', 'set首页');
                                         Sr::view()->load('index');
                                         </pre>
-                                        然后在视图文件里面就可以使用<code>$title</code>变量了。
-                                        <br>以上三种方法他们的优先级是：<b>第二个参数</b> > <code>->set()</code> > <code>->add()</code>
+                                        <h3 class="title_h3">3.直接add传递</h3>
+                                        如下：
+                                        <pre class="brush:php">
+                                        Sr::view()->add($data)->load('index');
+                                        //还有另一种方式如下
+                                        Sr::view()->add('title', 'add首页')->load('index');
+                                        //也是可以用以下方式
+                                        Sr::view()->add('title', 'add首页');
+                                        Sr::view()->load('index');
+                                        </pre>
+                                        <h3 class="title_h3">4.set、add和直接传递data的区别</h3>
+                                        1.<code>set</code>和<code>add</code>添加的数据在所有的视图中都可以使用，包括视图里面包含另外一个视图，
+                                        <br>传递<code>data</code>的数据只对当前的视图起作用，如果这个视图包含其它视图，其它视图是获取不到<code>data</code>里面的数据的
+                                        <br>2.如果之前数据存在，<code>set</code>方法会直接覆盖,而<code>add</code>方法是不会覆盖。
+                                        <br>3.三种方法里面有同名的数据覆盖优先级是：<code>data</code> > <code>set</code> > <code>add</code>
+                                        <br><b>从上面我们可以看到结果是:</b>
+                                        <br><code>data</code>里面的同名数据会覆盖<code>set</code>或者<code>add</code>里面的同名数据。
                                 </li>
                                 <li>
                                         <h2 class="title_h2">返回视图内容</h2>
