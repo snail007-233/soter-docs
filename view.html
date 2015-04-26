@@ -21,6 +21,14 @@
                                         其中$view_name是视图文件名（不含后缀），$data是要传递到视图中的数据（关联数组），$is_return是返回视图内容。
                                         <br>比如：
                                         <br>视图文件<code>application/views/index.php</code>，在任意地方使用里就可以通过<code>Sr::view()->load('index')</code>加载视图。
+                                        <br>3.我们还提供加载主项目的视图，这个一般是在hmvc模块中使用到，用于复用主项目的视图文件，比如通用的header等。
+                                        <br>示例如下：
+                                        <pre class="brush:php">
+                                                Sr::view()->loadParent($view_name, $data, $is_return);
+                                        </pre>
+                                        我们可以看到<code>loadParent</code>也是有三个参数，其实三个参数跟<code>load</code>用法一样。
+                                        <br><b class="text_strong">提示：</b>
+                                        <br>了解详细的HMVC,点击进入<a href="hmvc.html">HMVC</a>                                        
                                 </li>
                                 <li>
                                         <h2 class="title_h2">传递数据</h2>
@@ -53,8 +61,41 @@
                                         </pre>
                                         <h3 class="title_h3">4.set、add和直接传递data的区别</h3>
                                         1.<code>set</code>和<code>add</code>添加的数据在所有的视图中都可以使用，包括视图里面包含另外一个视图，
-                                        <br>传递<code>data</code>的数据只对当前的视图起作用，如果这个视图包含其它视图，其它视图是获取不到<code>data</code>里面的数据的
-                                        <br>2.如果之前数据存在，<code>set</code>方法会直接覆盖,而<code>add</code>方法是不会覆盖。
+                                        <br>传递<code>data</code>的数据只对当前的视图起作用，如果这个视图包含其它视图，包含其它视图是获取不到<code>data</code>里面的数据的。
+                                        <br>2.如果之前有数据存在，<code>set</code>方法会直接覆盖,<code>add</code>方法是不会覆盖。
+                                        <br>示例如下:
+                                        <br>2.1.新建视图文件application/views/test_load_data.php 
+                                        <br>输入以下代码：
+                                        <pre class="brush:php">
+                                                &lt;?php echo $a; ?&gt;
+                                        </pre>
+                                        2.2.新建控制器文件application/classes/Controller/Welcome.php 
+                                        <br>输入以下代码：
+                                        <pre class="brush:php">
+                                        &lt;?php
+
+                                        class Controller_Welcome extends Soter_Controller {
+
+                                                public function do_set() {
+                                                        $data = array('a' => 'vvv');
+                                                        $data2 = array('a'=>333);
+                                                        Sr::view()->set($data);
+                                                        return Sr::view()->set($data2)->load('test_load_data');
+                                                }
+
+                                                public function do_add() {
+                                                        $data = array('a' => 'vvv');
+                                                        $data2 = array('a'=>333);
+                                                        Sr::view()->add($data);
+                                                        return Sr::view()->add($data2)->load('test_load_data');
+                                                }
+                                        }
+                                        </pre>
+                                        浏览器访问：http://127.0.0.1/index.php/Welcome/set.do 
+                                        <br>将会输出：333
+                                        <br>浏览器访问：http://127.0.0.1/index.php/Welcome/add.do 
+                                        <br>将会输出：vvv
+                                        <br>我们可以看到上面结果是，<code>set</code>方法会直接覆盖之前数据，而<code>add</code>是不会覆盖之前数据。
                                         <br>3.三种方法里面有同名的数据覆盖优先级是：<code>data</code> > <code>set</code> > <code>add</code>
                                         <br><b>从上面我们可以看到结果是:</b>
                                         <br><code>data</code>里面的同名数据会覆盖<code>set</code>或者<code>add</code>里面的同名数据。
@@ -84,7 +125,7 @@
                                                 &lt;?php echo $test; ?&gt;
                                         </pre>
                                         2.新建控制器文件application/classes/Controller/Welcome.php 
-                                        输入以下代码：
+                                        <br>输入以下代码：
                                         <pre class="brush:php">
                                                 &lt;?php
 
