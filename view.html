@@ -78,14 +78,14 @@
 
                                                 public function do_set() {
                                                         $data = array('a' => 'vvv');
-                                                        $data2 = array('a'=>333);
+                                                        $data2 = array('a' => 333);
                                                         Sr::view()->set($data);
                                                         return Sr::view()->set($data2)->load('test_load_data');
                                                 }
 
                                                 public function do_add() {
                                                         $data = array('a' => 'vvv');
-                                                        $data2 = array('a'=>333);
+                                                        $data2 = array('a' => 333);
                                                         Sr::view()->add($data);
                                                         return Sr::view()->add($data2)->load('test_load_data');
                                                 }
@@ -97,6 +97,30 @@
                                         <br>将会输出：vvv
                                         <br>我们可以看到上面结果是，<code>set</code>方法会直接覆盖之前数据，而<code>add</code>是不会覆盖之前数据。
                                         <br>3.三种方法里面有同名的数据覆盖优先级是：<code>data</code> > <code>set</code> > <code>add</code>
+                                        <br>示例如下：
+                                        <br>3.1.新建视图文件application/views/test_data.php 
+                                        <br>输入以下代码：
+                                        <pre class="brush:php">
+                                                &lt;?php echo $test; ?&gt;
+                                        </pre>
+                                        3.2.新建控制器文件application/classes/Controller/Welcome.php 
+                                        <br>输入以下代码：
+                                        <pre class="brush:php">
+                                        &lt;?php
+
+                                        class Controller_Welcome extends Soter_Controller {
+
+                                                public function do_view() {
+                                                        $data = array('test' => 'add');
+                                                        $data2 = array('test' => 'set');
+                                                        $data3 = array('test' => 'data');
+                                                        Sr::view()->set($data);
+                                                        return Sr::view()->set($data2)->load('test_data', $data3);
+                                                }
+                                        }
+                                        </pre>
+                                        浏览器访问：http://127.0.0.1/index.php/Welcome/view.do 
+                                        <br>将会输出：data
                                         <br><b>从上面我们可以看到结果是:</b>
                                         <br><code>data</code>里面的同名数据会覆盖<code>set</code>或者<code>add</code>里面的同名数据。
                                 </li>
