@@ -25,22 +25,22 @@
 					</pre>
 					Soter内置的缓存类有：
 					<br>1.<b>Soter_Cache_Apc</b>       
-					<br>使用方法：->setCacheHandle(new Soter_Cache_Apc('cache_apc'))
-					<br>使用配置文件是：cache_apc.php
+					<br>使用方法：->setCacheHandle(new Soter_Cache_Apc('cache/apc'))
+					<br>使用配置文件是：application/config/default/cache/apc.php
 					<br>2.<b>Soter_Cache_Memcached</b>   
-					<br>使用方法：->setCacheHandle(new Soter_Cache_Memcached('cache_memcached'))
-					<br>使用配置文件是：cache_memcached.php
+					<br>使用方法：->setCacheHandle(new Soter_Cache_Memcached('cache/memcached'))
+					<br>使用配置文件是：application/config/default/cache/memcached.php
 					<br>3.<b>Soter_Cache_Memcache</b>    
-					<br>使用方法：->setCacheHandle(new Soter_Cache_Memcache('cache_memcache'))
-					<br>使用配置文件是：cache_memcache.php
+					<br>使用方法：->setCacheHandle(new Soter_Cache_Memcache('cache/memcache'))
+					<br>使用配置文件是：application/config/default/cache/memcache.php
 					<br>4.<b>Soter_Cache_Redis</b>       
-					<br>使用方法：->setCacheHandle(new Soter_Cache_Redis('cache_redis'))
-					<br>使用配置文件是：cache_redis.php
+					<br>使用方法：->setCacheHandle(new Soter_Cache_Redis('cache/redis'))
+					<br>使用配置文件是：application/config/default/cache/redis.php
 					<br>5.<b>Soter_Cache_Mongodb</b>     
-					<br>使用方法：->setCacheHandle(new Soter_Cache_Mongodb('cache_mongodb'))
-					<br>使用配置文件是：cache_mongodb.php
+					<br>使用方法：->setCacheHandle(new Soter_Cache_Mongodb('cache/mongodb'))
+					<br>使用配置文件是：application/config/default/cache/mongodb.php
 					<br>6.<b>Soter_Cache_File</b>   
-					<br>使用方法：->setCacheHandle(new Soter_Cache_File(SOTER_APP_PATH . 'storage/cache/''))
+					<br>使用方法：->setCacheHandle(new Soter_Cache_File())
 					<br>它会把缓存数据写到<code>application/storage/cache/</code>目录下面。
 				</li>
 				<li><h3 class="title_h2">使用缓存</h3>
