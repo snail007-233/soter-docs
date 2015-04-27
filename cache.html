@@ -20,7 +20,11 @@
 					缓存操作使用的是入口文件里面配置的程序使用的缓存处理类，配置位于入口文件index.php里面，
 					<br>在入口文件里面我们看到下面这个一行：
 					<pre class="brush:php">
-						//设置缓存类型
+						/**
+						 * 设置缓存类型
+						 * 1.setCacheHandle可以直接传入Soter_Cache缓存类对象
+						 * 2.setCacheHandle也可以传入配置文件名称，配置文件里面要返回一个Soter_Cache缓存类对象。
+						 */
 						->setCacheHandle(new Soter_Cache_File())
 					</pre>
 					Soter内置的缓存类有：
@@ -103,6 +107,7 @@
 						 return Sr::config()->getPrimaryApplicationDir() . 'storage/cache/';
 					</pre>
 					它会把缓存数据写到<code>application/storage/cache/</code>目录下面。
+					
 				</li>
 				<li><h3 class="title_h2">使用缓存</h3>
 					当我们安着上面的操作配置了缓存处理类之后，我们就可以用下面的方法操作缓存数据了。
