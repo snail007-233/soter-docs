@@ -27,11 +27,10 @@
 						 */
 						->setCacheHandle(new Soter_Cache_File())
 					</pre>
-
 					提示：
 					<br>传入配置文件名称时，我们就可以做到不同环境下面自动使用不同的缓存类型，
 					<br>比如本地开发环境使用文件缓存，产品环境使用redis缓存。
-					<br>例如：传入cache/type
+					<br>例如：setCacheHandle传入cache/type
 					<br>文件:config/development/cache/type.php内容如下：
 					<pre class="brush:php">
 						return new Soter_Cache_File();
@@ -40,7 +39,7 @@
 					<pre class="brush:php">
 						return new Soter_Cache_Redis('cache/redis');
 					</pre>
-					<br>Soter内置的缓存类有：
+					Soter内置的缓存类有：
 					<br>1.<b>Soter_Cache_Apc</b>
 					<br>使用方法：->setCacheHandle(new Soter_Cache_Apc())
 					<br>2.<b>Soter_Cache_Memcached</b>   
