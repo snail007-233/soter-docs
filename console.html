@@ -18,7 +18,7 @@
 				<li><h2 class="title_h2">创建Task</h2>
 					Task类文件都在application/Task/目录下面，每个Task类都必须继承抽象类Soter_Task，实现抽象方法execute。
 					<br>下面我们创建一个Task
-					<br>1.新建文件：application/Task/My/FirstTask.php
+					<br><b>1.新建文件：application/Task/My/FirstTask.php</b>
 					<br>内容如下：
 					<pre class="brush:php">
 						class  Task_My_FirstTask extends Soter_Task {
@@ -30,7 +30,7 @@
 					我们看到我们的Task_My_FirstTask类，继承了抽象类Soter_Task，实现了execute方法，接受了一个Soter_CliArgs参数对象，
 					<br>通过这个对象我们可以获取命令行传递过来的参数，比如上面传递的--test=hello，
 					<br>我们就可以通过$args->get('test')获取hello。
-					2.命令行执行这个Task任务
+					<br><b>2.命令行执行这个Task任务</b>
 					<br>比如执行下面的命令：
 					<pre class="brush:php">
 						php /home/www/soter/index.php --env=development --task=My_First --test=hello	
