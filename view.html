@@ -114,7 +114,7 @@
                                                         $data = array('test' => 'add');
                                                         $data2 = array('test' => 'set');
                                                         $data3 = array('test' => 'data');
-                                                        Sr::view()->set($data);
+                                                        Sr::view()->add($data);
                                                         return Sr::view()->set($data2)->load('test_data', $data3);
                                                 }
                                         }
