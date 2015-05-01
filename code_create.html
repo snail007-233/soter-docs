@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>代码生成器</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="js/inc.js"></script>
+        </head>
+        <body>
+                <fieldset>
+                        <legend>代码生成器</legend>
+                        <ol>
+                                <li>
+                                        <h2 class="title_h2">配置php命令行</h2>
+                                        假如php.exe在E:\xampp\php里面。
+                                        <br>1.创建index.php
+                                        <br>输入以下代码
+                                        <pre class="brush:php">
+                                                &lt;?php
+                                                echo 'hello world';
+                                                ?&gt;
+                                        </pre>
+                                        2.高级系统设置-系统属性-高级-环境变量
+                                        <br>3.Path点击编辑
+                                        <br>4.Path里面的变量值添加<b>E:\xampp\php</b>
+                                </li>
+                                <li>
+                                       <h2 class="title_h2">生成控制器</h2> 
+                                       输入以下命令：
+                                       <br>php index.php --task=Soter_Generator --type=controller --name=MyFirstController
+                                       <br>我们可以在<code>application/classes/Controller</code>里面看到，有一个MyFirstController.php文件。
+                                       <br>打开MyFirstController.php文件我们会看到以下代码
+                                       <pre class="brush:php">
+                                                &lt;?php
+                                                class  Controller_MyFirstController extends Soter_Controller {
+                                                        public function do_index() {
+
+                                                        }
+                                                }
+                                        </pre>
+                                       <b class="text_strong">注意：index.php是我们存放soter程序的入口文件,name是文件名</b>
+                                       <br><b class="text_strong">提示：</b>
+                                       <br>了解详细的控制器，点击进入<a href="controller.html">控制器</a>
+                                </li>
+                                <li>
+                                       <h2 class="title_h2">生成模型</h2> 
+                                       输入以下命令：
+                                       <br>php index.php --task=Soter_Generator --type=model --name=MyFirstModel
+                                       <br>我们可以在<code>application/classes/Model</code>里面看到，有一个MyFirstModel.php文件。
+                                       <br>打开MyFirstModel.php文件我们会看到以下代码
+                                       <pre class="brush:php">
+                                                &lt;?php
+                                                class  Model_MyFirstModel extends Soter_Model {
+                                                        public function model() {
+
+                                                        }
+                                                }
+                                        </pre>
+                                       <b class="text_strong">注意：index.php是我们存放soter程序的入口文件,name是文件名</b>
+                                       <br><b class="text_strong">提示：</b>
+                                       <br>了解详细的模型，点击进入<a href="model.html">模型</a>
+                                </li>
+                                <li>
+                                       <h2 class="title_h2">生成Task</h2> 
+                                       输入以下命令：
+                                       <br>php index.php --task=Soter_Generator --type=task --name=MyFirstTask
+                                       <br>我们可以在<code>application/classes/Task</code>里面看到，有一个MyFirstTask.php文件。
+                                       <br>打开MyFirstTask.php文件我们会看到以下代码
+                                       <pre class="brush:php">
+                                                &lt;?php
+                                                class  Task_MyFirstTask extends Soter_Task {
+                                                        public function execute(Soter_CliArgs $args) {
+
+                                                        }
+                                                }
+                                        </pre>
+                                       <b class="text_strong">注意：index.php是我们存放soter程序的入口文件,name是文件名</b>
+                                       <br><b class="text_strong">提示：</b>
+                                       <br>了解详细的Task，点击进入<a href="console.html">Task</a>
+                                </li>
+                                <li>
+                                       <h2 class="title_h2">生成Business</h2> 
+                                       输入以下命令：
+                                       <br>php index.php --task=Soter_Generator --type=business --name=MyFirstBusiness 
+                                       <br>我们可以在<code>application/classes/Business</code>里面看到，有一个MyFirstBusiness.php文件。
+                                       <br>打开MyFirstBusiness.php文件我们会看到以下代码
+                                       <pre class="brush:php">
+                                                &lt;?php
+                                                class  Business_MyFirstBusiness extends Soter_Business {
+                                                        public function business() {
+
+                                                        }
+                                                }
+                                        </pre>
+                                       <b class="text_strong">注意：index.php是我们存放soter程序的入口文件,name是文件名</b>
+                                       <br><b class="text_strong">提示：</b>
+                                       <br>了解详细的Task，点击进入<a href="console.html">Task</a>
+                                </li>
+                                <li>
+                                       <h2 class="title_h2">生成Dao</h2> 
+                                       1.首先我们先创建test数据，代码如下
+                                       <pre class="brush:sql">
+                                       DROP TABLE IF EXISTS `test`;
+                                       CREATE TABLE `test` (
+                                                `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
+                                                `username` varchar(20) NOT NULL COMMENT '用户名',
+                                                `addtime` int(10) NOT NULL COMMENT '添加时间',
+                                                 PRIMARY KEY (`id`)
+                                       ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+                                       </pre>
+                                       2.输入以下命令：
+                                       <br> php index.php --task=Soter_Generator_Mysql --type=dao --name=MyFirstDao --table=test
+                                       <br>我们可以在<code>application/classes/Dao</code>里面看到，有一个MyFirstDao.php文件。
+                                       <br>打开MyFirstDao.php文件我们会看到以下代码
+                                       <pre class="brush:php">
+                                                &lt;?php
+                                                
+                                                class Dao_MyFirstDao extends Soter_Dao {
+
+                                                        public function getColumns() {
+                                                                return array(
+                                                                                'id'//标识
+                                                                                ,'username'//用户名
+                                                                                ,'addtime'//添加时间
+                                                                                );
+                                                        }
+
+                                                        public function getPrimaryKey() {
+                                                                return 'id';
+                                                        }
+
+                                                        public function getTable() {
+                                                                return 'test';
+                                                        }
+
+                                                }
+                                        </pre>
+                                       <b class="text_strong">注意：index.php是我们存放soter程序的入口文件,name是文件名,table是我们表名</b>
+                                       <br><b class="text_strong">提示：</b>
+                                       <br>了解详细的Dao，点击进入<a href="dao.html">Dao</a>
+                                </li>
+                                <li>
+                                       <h2 class="title_h2">生成Bean</h2> 
+                                       1.首先我们先创建test数据，代码如下
+                                       <pre class="brush:sql">
+                                       DROP TABLE IF EXISTS `test`;
+                                       CREATE TABLE `test` (
+                                                `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标识',
+                                                `username` varchar(20) NOT NULL COMMENT '用户名',
+                                                `addtime` int(10) NOT NULL COMMENT '添加时间',
+                                                 PRIMARY KEY (`id`)
+                                       ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+                                       </pre>
+                                       2.输入以下命令：
+                                       <br> php index.php --task=Soter_Generator_Mysql --type=bean --name=MyFirstBean --table=test
+                                       <br>我们可以在<code>application/classes/Bean</code>里面看到，有一个MyFirstBean.php文件。
+                                       <br>打开MyFirstBean.php文件我们会看到以下代码
+                                       <pre class="brush:php">
+                                                &lt;?php
+                                                
+                                                class Bean_MyFirstBean extends Soter_Bean {
+
+                                                        //标识
+                                                        private $id;
+
+                                                        //用户名
+                                                        private $username;
+
+                                                        //添加时间
+                                                        private $addtime;
+
+                                                        public function getId() {
+                                                                return $this->id;
+                                                        }
+
+                                                        public function setId($id) {
+                                                                $this->id = $id;
+                                                                return $this;
+                                                        }
+
+                                                        public function getUsername() {
+                                                                return $this->username;
+                                                        }
+
+                                                        public function setUsername($username) {
+                                                                $this->username = $username;
+                                                                return $this;
+                                                        }
+
+                                                        public function getAddtime() {
+                                                                return $this->addtime;
+                                                        }
+
+                                                        public function setAddtime($addtime) {
+                                                                $this->addtime = $addtime;
+                                                                return $this;
+                                                        }
+
+                                                }
+                                        </pre>
+                                       <b class="text_strong">注意：index.php是我们存放soter程序的入口文件,name是文件名,table是我们表名</b>
+                                       <br><b class="text_strong">提示：</b>
+                                       <br>了解详细的Bean，点击进入<a href="bean.html">Bean</a>
+                                </li>
+                        </ol>
+                </fieldset>
+                <script src="js/inc.foot.js"></script>
+        </body>
+</html>
