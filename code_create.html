@@ -11,23 +11,31 @@
                         <legend>代码生成器</legend>
                         <ol>
                                 <li>
-                                        <h2 class="title_h2">配置php命令行</h2>
+                                        <h2 class="title_h2">配置php命令</h2>
+                                        <h3 class="title_h3">1.Windows</h3>
                                         假如php.exe在E:\xampp\php里面。
-                                        <br>1.创建index.php
-                                        <br>输入以下代码
+                                        <br>1.高级系统设置-系统属性-高级-环境变量
+                                        <br>2.Path点击编辑
+                                        <br>3.Path里面的变量值添加<b>E:\xampp\php</b>                                        
+                                        <h3 class="title_h3">2.Linux</h3>
+                                        假如php放在usr/local/php/bin/php里面。
+                                        <br>我们直接用命令：<code>/usr/local/php/bin/php test.php</code>
+                                        <h3 class="title_h3">3.测试Windows和Linux</h3>
+                                        我们可以试试能不能执行php命令。
+                                        <br>1.我们先创建test.php
+                                        <br>输入以下代码:
                                         <pre class="brush:php">
                                                 &lt;?php
                                                 echo 'hello world';
-                                                ?&gt;
                                         </pre>
-                                        2.高级系统设置-系统属性-高级-环境变量
-                                        <br>3.Path点击编辑
-                                        <br>4.Path里面的变量值添加<b>E:\xampp\php</b>
+                                        <br>windows执行命令: <b>php E:\test.php</b>
+                                        <br>linux执行命令: <b>/usr/local/php/bin/php test.php</b>
+                                        <br>如来有输出<b>hello world</b>说明我们配置成功了
                                 </li>
                                 <li>
                                        <h2 class="title_h2">生成控制器</h2> 
                                        输入以下命令：
-                                       <br>php index.php --task=Soter_Generator --type=controller --name=MyFirstController
+                                       <br>index.php --task=Soter_Generator --type=controller --name=MyFirstController
                                        <br>我们可以在<code>application/classes/Controller</code>里面看到，有一个MyFirstController.php文件。
                                        <br>打开MyFirstController.php文件我们会看到以下代码
                                        <pre class="brush:php">
@@ -45,7 +53,7 @@
                                 <li>
                                        <h2 class="title_h2">生成模型</h2> 
                                        输入以下命令：
-                                       <br>php index.php --task=Soter_Generator --type=model --name=MyFirstModel
+                                       <br>index.php --task=Soter_Generator --type=model --name=MyFirstModel
                                        <br>我们可以在<code>application/classes/Model</code>里面看到，有一个MyFirstModel.php文件。
                                        <br>打开MyFirstModel.php文件我们会看到以下代码
                                        <pre class="brush:php">
@@ -63,7 +71,7 @@
                                 <li>
                                        <h2 class="title_h2">生成Task</h2> 
                                        输入以下命令：
-                                       <br>php index.php --task=Soter_Generator --type=task --name=MyFirstTask
+                                       <br>index.php --task=Soter_Generator --type=task --name=MyFirstTask
                                        <br>我们可以在<code>application/classes/Task</code>里面看到，有一个MyFirstTask.php文件。
                                        <br>打开MyFirstTask.php文件我们会看到以下代码
                                        <pre class="brush:php">
@@ -81,7 +89,7 @@
                                 <li>
                                        <h2 class="title_h2">生成Business</h2> 
                                        输入以下命令：
-                                       <br>php index.php --task=Soter_Generator --type=business --name=MyFirstBusiness 
+                                       <br>index.php --task=Soter_Generator --type=business --name=MyFirstBusiness 
                                        <br>我们可以在<code>application/classes/Business</code>里面看到，有一个MyFirstBusiness.php文件。
                                        <br>打开MyFirstBusiness.php文件我们会看到以下代码
                                        <pre class="brush:php">
@@ -109,7 +117,7 @@
                                        ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
                                        </pre>
                                        2.输入以下命令：
-                                       <br> php index.php --task=Soter_Generator_Mysql --type=dao --name=MyFirstDao --table=test
+                                       <br>index.php --task=Soter_Generator_Mysql --type=dao --name=MyFirstDao --table=test
                                        <br>我们可以在<code>application/classes/Dao</code>里面看到，有一个MyFirstDao.php文件。
                                        <br>打开MyFirstDao.php文件我们会看到以下代码
                                        <pre class="brush:php">
@@ -152,7 +160,7 @@
                                        ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
                                        </pre>
                                        2.输入以下命令：
-                                       <br> php index.php --task=Soter_Generator_Mysql --type=bean --name=MyFirstBean --table=test
+                                       <br>index.php --task=Soter_Generator_Mysql --type=bean --name=MyFirstBean --table=test
                                        <br>我们可以在<code>application/classes/Bean</code>里面看到，有一个MyFirstBean.php文件。
                                        <br>打开MyFirstBean.php文件我们会看到以下代码
                                        <pre class="brush:php">
