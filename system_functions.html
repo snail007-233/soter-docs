@@ -1,15 +1,187 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>系统函数</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="js/inc.js"></script>
-    </head>
-    <body>
-        <fieldset>
-	    <legend>系统函数</legend>
-        </fieldset>
-        <script src="js/inc.foot.js"></script>
-    </body>
+        <head>
+                <title>系统函数</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="js/inc.js"></script>
+        </head>
+        <body>
+                <fieldset>
+                        <legend>系统函数</legend>
+                        <ol>
+                                <li>
+                                        <h2 class="title_h2">打印变量内容</h2>
+                                        通过Sr::dump()方法，打印变量内容，参数和var_dump一样，但是比var_dump好看让我们更容易找出问题。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                $a = array('a'=>1, 'b'=>2, 'c'=>3);
+                                                Sr::dump($a);
+                                                //上面将会输出：
+                                                /*
+                                                array(3) {
+                                                        ["a"]=>
+                                                        int(1)
+                                                        ["b"]=>
+                                                        int(2)
+                                                        ["c"]=>
+                                                        int(3)
+                                                }
+                                                */
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">realpath的改良版</h2>
+                                        通过Sr::realPath()方法，文件或者目录不存在的时候也可以返回正确的路径。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                Sr::realPath('file.php', false);
+                                                //第一个参数 必填：文件或者目录
+                                                //第二个参数 选填：如果为true的话，最后多加/符号，默认是false
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">验证是否用命令行</h2>
+                                        通过Sr::isCli()方法，验证是否用命令行。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                Sr::dump(Sr::isCli());
+                                                //如果用命令行就返回true，否则返回false
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">过滤xss注入</h2>
+                                        通过Sr::xssClean()方法，过滤xss注入。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                $var = array('&lt;test');
+                                                Sr::xssClean($var);
+                                                //$var:可以数组，也可以字符串
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">获取服务器的hostname</h2>
+                                        通过Sr::hostname()方法，获取服务器的hostname。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                echo Sr::hostname();
+                                                //输出服务器的hostname
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">获取服务器的ip</h2>
+                                        通过Sr::serverIp()方法，获取服务器的ip。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                echo Sr::serverIp();
+                                                //输出服务器的ip
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">获取客户端的ip</h2>
+                                        通过Sr::clientIp()方法，获取客户端的ip。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                echo Sr::clientIp();
+                                                //输出客户端的ip
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">验证字符串开头</h2>
+                                        通过Sr::strBeginsWith()方法，验证字符串开头。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                Sr::dump(Sr::strBeginsWith('helle world','helles'));
+                                                //将会输出：false
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">验证字符串结尾</h2>
+                                        通过Sr::strEndsWith()方法，验证字符串结尾。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                Sr::dump(Sr::strEndsWith('helle world','world'));
+                                                //将会输出：true
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">获取IP段信息</h2>
+                                        通过Sr::ipInfo()方法，获取IP段信息。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                echo Sr::ipInfo('192.168.1.10/24、192.168.1.10/32','count');                                                
+                                                /*
+                                                第一参数 必填 格式：192.168.1.10/24、192.168.1.10/32
+                                                传入Ip地址对Ip段地址进行处理得到相关的信息
+                                                1.没有第二参数时，返回数组：array(
+                                                        netmask=>网络掩码
+                                                        count=>网络可用IP数目
+                                                        start=>可用IP开始
+                                                        end=>可用IP结束
+                                                        netaddress=>网络地址
+                                                        broadcast=>广播地址
+                                                )
+                                                第二参数 选填：有第二参数时返回参数对应的值，第二参数是上面数组的键。
+                                                */
+                                                //将会输出：网络可用IP数目
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">获取当前UNIX毫秒时间戳</h2>
+                                        通过Sr::microtime()方法，获取当前UNIX毫秒时间戳。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                echo Sr::microtime();
+                                                //将会输出：时间戳
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">删除文件夹和子文件夹</h2>
+                                        通过Sr::rmdir()方法，删除文件夹和子文件夹。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                Sr::rmdir('test', true);
+                                                //第一个参数 必填：文件夹路径
+                                                //第二个参数 选填：是否保留最父层文件夹
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">生成控制器方法的url</h2>
+                                        通过Sr::url()方法，生成控制器方法的url。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                $data = array('a' => '1', 'd' => '2');
+                                                echo Sr::url('Welcome/index.do', $data);
+                                                //第一个参数 必填：控制器方法
+                                                //第二个参数 选填：get传递的参数数组，键值对，键是参数名，值是参数值
+                                        </pre>
+                                        
+                                </li>
+                                <li>
+                                        <h2 class="title_h2">获取入口文件所在目录url路径</h2>
+                                        通过Sr::urlPath()方法，获取入口文件所在目录url路径，只能在web访问时使用，在命令行下面会抛出异常。
+                                        <br>示例如下
+                                        <pre class="brush:php">
+                                                echo Sr::urlPath('public/css/style.css', false);
+                                                //第一个参数 必填：子路径或者文件路径，如果非空就会被附加在入口文件所在目录的后面
+                                                //第二个参数 选填：如果为true的话，最后多加/符号，默认是true
+                                        </pre>
+                                        
+                                </li>
+                        </ol>
+                </fieldset>
+                <script src="js/inc.foot.js"></script>
+        </body>
 </html>
