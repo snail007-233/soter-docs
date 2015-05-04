@@ -115,24 +115,24 @@
                                 </li>
                                 <li>
                                         <h2 class="title_h2">获取IP段信息</h2>
-                                        通过Sr::ipInfo()方法，获取IP段信息。
+                                        通过Sr::ipInfo()方法，传入Ip地址对Ip段地址进行处理得到相关的信息。
                                         <br>示例如下
                                         <pre class="brush:php">
-                                                echo Sr::ipInfo('192.168.1.10/24、192.168.1.10/32','count');                                                
-                                                /*
-                                                第一参数 必填 格式：192.168.1.10/24、192.168.1.10/32
-                                                传入Ip地址对Ip段地址进行处理得到相关的信息
-                                                1.没有第二参数时，返回数组：array(
-                                                        netmask=>网络掩码
-                                                        count=>网络可用IP数目
-                                                        start=>可用IP开始
-                                                        end=>可用IP结束
-                                                        netaddress=>网络地址
-                                                        broadcast=>广播地址
+                                                Sr::dump(Sr::ipInfo('192.168.1.1/32'));                                                
+                                                /*                                                
+                                                上面将会输出：array(
+                                                        netmask=>255.255.255.255(网络掩码)
+                                                        count=>1(网络可用IP数目)
+                                                        start=>192.168.1.1(可用IP开始)
+                                                        end=>192.168.1.1(可用IP结束)
+                                                        netaddress=>192.168.1.1(网络地址)
+                                                        broadcast=>192.168.1.1(广播地址)
                                                 )
-                                                第二参数 选填：有第二参数时返回参数对应的值，第二参数是上面数组的键。
                                                 */
-                                                //将会输出：当前网络可用IP数目
+
+                                                echo Sr::ipInfo('192.168.1.1/32', 'netmask');
+                                                //上面将会输出：255.255.255.255
+                                                //我们可以看到多了个第二参数，第二参数是我们上面数组的键。
                                         </pre>
                                         
                                 </li>
@@ -151,9 +151,14 @@
                                         通过Sr::rmdir()方法，删除文件夹和子文件夹。
                                         <br>示例如下
                                         <pre class="brush:php">
-                                                Sr::rmdir('test', true);
-                                                //第一个参数 必填：文件夹路径
-                                                //第二个参数 选填：是否保留最父层文件夹
+                                                //假如我们路径是E:\test底下有test.php和images文件夹
+                                                Sr::rmdir('E:\test');
+                                                //执行上面代码：将会删除test文件夹包括底下test.php和images文件夹
+
+                                                //假如我们路径是E:\test2底下有test2.php和images2文件夹
+                                                Sr::rmdir('E:\test2', false);
+                                                //执行上面代码：将会删除test2.php和images2文件夹，保留test2文件夹
+                                                //我们可以看到多了个第二参数，作用是否保留最父层文件夹，我们默认是不保留的。
                                         </pre>
                                         
                                 </li>
