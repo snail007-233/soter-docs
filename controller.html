@@ -74,6 +74,54 @@
                                         <br>那么在这种情况下我们可以设置一个默认的控制器和默认的方法。
 					<br>详细的内容参考<a href="router.html">路由手册</a>的“<b>默认控制器和默认方法</b>”部分。
                                 </li>
+				 <li>
+                                        <h2 class="title_h2">方法缓存</h2>
+                                        Soter可以在控制器方法级别上缓存方法的输出，开启这个功能很简单，只需要在入口文件里面进行配置即可。
+					<br>我们看到入口文件里面有下面的配置：
+					<pre class="brush:php">
+						//设置控制器方法缓存规则，可以是配置文件名称，也可以是配置规则数组
+						->setMethodCacheConfig('method_cache')
+                                        </pre>
+					通过传入配置文件名称可以让我们在不同环境下面自动使用不同的缓存策略，
+					<br>我们只需要在不同的环境配置目录下面放一个method_cache.php即可，里面写上对应环境的配置。
+					<br>method_cache.php内容如下：
+					<pre class="brush:php">
+                                                /**
+						* 需要缓存的控制器方法缓存配置
+						* 键规则是：控制器名称::方法名称
+						* 控制器名称不需要Controller_前缀,方法名称不需要前缀。
+						*/
+					       return array(
+						   'Welcome::index' => array(
+						       'cache' => true, //是否开启缓存
+						       'time' => 3600, //缓存时间，单位秒
+						       'key' => function() {
+							       //根据具体的业务逻辑，返回缓存key，
+							       //返回的key如果为空，则不使用缓存
+							       return 'userId:' . Sr::get('userId');
+						       }
+						   )
+					       );
+                                        </pre>
+                                       我们还可以直接传入配置数组：
+					<pre class="brush:php">
+						->setMethodCacheConfig(
+							array(
+							   'Welcome::index' => array(
+							       'cache' => true, //是否开启缓存
+							       'time' => 3600, //缓存时间，单位秒
+							       'key' => function() {
+								       //根据具体的业务逻辑，返回缓存key，
+								       //返回的key如果为空，则不使用缓存
+								       return 'userId:' . Sr::get('userId');
+							       }
+							   )
+						       )
+						)
+                                        </pre>
+                                         直接传入配置数组的方式相对不够灵活，无论哪种环境我们的程序使用的都是一样的方法缓存配置。
+					 <br>使用传入配置数组还是使用传入配置文件名称，我们可以按着自己的需求来选择。
+                                </li>
                         </ol>
                 </fieldset>
                 <script src="js/inc.foot.js"></script>
