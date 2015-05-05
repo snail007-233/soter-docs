@@ -29,8 +29,38 @@
                                                 }
                                                 */
                                         </pre>
-                                        
+
                                 </li>
+				<li>
+                                        <h2 class="title_h2">分页条</h2>
+					通过Sr::page($total, $page, $pagesize, $url,$order=array(1,2,3,4,5,6),$a_count=10)方法，可以方便的产生一个分页条。
+					<br>一个标准的分页条由下面6部分组成，如下：
+					<br><img src="images/page.jpg"/>
+					<br><b class="text_strong">参数说明：</b>
+					<br><b>$total</b>    一共多少记录
+					<br><b>$page</b>     当前是第几页
+					<br><b>$pagesize</b> 每页多少
+					<br><b>$url</b>      url是什么，url里面的{page}会被替换成页码
+					<br><b>$order</b>    分页条的组成，是一个数组,可以按着1-6的序号,选择分页条组成部分和每个部分的顺序
+					<br><b>$a_count</b>  分页条中a页码链接的总数量(也就是上面第4部分),不包含当前页的a标签，默认10个。
+					<br><b class="text_strong">示例：</b>
+					<pre class="brush:php">
+						echo Sr::page(100,3,10,'?article/list/{page}',array(3,4,5,1,2,6),10);
+					</pre>
+					示例将输出:
+					<br><img src="images/page_demo.jpg"/>
+					<br><b class="text_strong">提示：</b>
+					<br>上面的6部分，每部分被一个span包围，span都有对应的class，便于css控制。
+					<br>每部分span的对应class如下：
+					<br>1:page_total
+					<br>2:page_cur
+					<br>3:page_bar_prefix
+					<br>4:page_cur_page
+					<br>5:page_bar_subfix
+					<br>6:page_input_num
+					<br><b>另外：</b>
+					<br>”转到“的class是:page_btn_go
+				</li>
                                 <li>
                                         <h2 class="title_h2">realpath的改良版</h2>
                                         通过Sr::realPath()方法，文件或者目录不存在的时候也可以返回正确的路径。
@@ -40,7 +70,7 @@
                                                 //第一个参数 必填：文件或者目录
                                                 //第二个参数 选填：如果为true的话，最后多加/符号，默认是false
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">验证是否用命令行</h2>
@@ -50,7 +80,7 @@
                                                 Sr::dump(Sr::isCli());
                                                 //如果用命令行就返回true，否则返回false
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">过滤xss注入</h2>
@@ -61,7 +91,7 @@
                                                 Sr::xssClean($var);
                                                 //$var:可以数组，也可以字符串
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">获取服务器的hostname</h2>
@@ -71,7 +101,7 @@
                                                 echo Sr::hostname();
                                                 //输出当前服务器的hostname
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">获取服务器的ip</h2>
@@ -81,7 +111,7 @@
                                                 echo Sr::serverIp();
                                                 //输出当前服务器的ip
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">获取客户端的ip</h2>
@@ -91,7 +121,7 @@
                                                 echo Sr::clientIp();
                                                 //输出当前客户端的ip
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">验证字符串开头</h2>
@@ -101,7 +131,7 @@
                                                 Sr::dump(Sr::strBeginsWith('helle world','helles'));
                                                 //将会输出：false
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">验证字符串结尾</h2>
@@ -111,7 +141,7 @@
                                                 Sr::dump(Sr::strEndsWith('helle world','world'));
                                                 //将会输出：true
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">获取IP段信息</h2>
@@ -134,7 +164,7 @@
                                                 //上面将会输出：255.255.255.255
                                                 //我们可以看到多了个第二参数，第二参数是我们上面数组的键。
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">获取当前UNIX毫秒时间戳</h2>
@@ -144,7 +174,7 @@
                                                 echo Sr::microtime();
                                                 //将会输出：当前UNIX毫秒时间戳
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">删除文件夹和子文件夹</h2>
@@ -160,7 +190,7 @@
                                                 //执行上面代码：将会删除test2.php和images2文件夹，保留test2文件夹
                                                 //我们可以看到多了个第二参数，作用是否保留最父层文件夹，我们默认是不保留的。
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">生成控制器方法的url</h2>
@@ -172,7 +202,7 @@
                                                 //第一个参数 必填：控制器方法
                                                 //第二个参数 选填：get传递的参数数组，键值对，键是参数名，值是参数值
                                         </pre>
-                                        
+
                                 </li>
                                 <li>
                                         <h2 class="title_h2">获取入口文件所在目录url路径</h2>
@@ -183,7 +213,7 @@
                                                 //第一个参数 必填：子路径或者文件路径，如果非空就会被附加在入口文件所在目录的后面
                                                 //第二个参数 选填：如果为true的话，最后多加/符号，默认是true
                                         </pre>
-                                        
+
                                 </li>
                         </ol>
                 </fieldset>
