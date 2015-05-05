@@ -115,6 +115,59 @@
 					上面读到的<code>$data=array('art_title'=>'值','art_content'=>'值')</code>，可以看到把无关的表单字段都过滤掉了。
                                 </li>
 				<li>
+                                        <h2 class="title_h2">自定义验证规则</h2>
+					Soter提供了一些验证规则，但是这些规则肯定无法满足所有的需求，那么我们可以拓展Soter的验证规则。
+					<br>在入口文件里面我们可以看到下面的配置：
+					<pre class="brush:php">
+						//设置自定义数据验证规则，参数可以是配置文件名称，也可以是规则数组
+						->setDataCheckRules('rules')
+					</pre>
+					配置文件rules.php内容如下：
+					<pre class="brush:php">
+						//验证规则返回布尔代表成功和失败
+						//如果要改变传入的值，把改变后的值赋值给$returnValue变量即可
+						//对于一个字段多条验证规则存在的时候，如果设置$break为true那么该字段的该条规则之后的验证规则不在起作用
+
+						return array(
+							'myRule' => function($key, $value, $data, $args, &$returnValue, &$break, &$db) {
+								    if ($value<100) {
+									   return false;
+								    }
+								    return true;
+							},
+							'encodePassword' => function($key, $value, $data, $args, &$returnValue, &$break, &$db) {
+									if (!$value) {
+									       return false;
+									}
+									$returnValue=md5($value);
+									return true;
+							    },
+							'optional' => function($key, $value, $data, $args, &$returnValue, &$break, &$db) {
+								    $break=!isset($data[$key]);
+								    return true;
+							},
+						);
+					</pre>
+					可以看到我们自定义了规则，名称是myRule和encodePassword，规则是一个匿名函数，函数接收了几个参数，
+					<br>然后函数里面进行了一些逻辑验证，返回验证成功还是失败。
+					<br>而且上面的规则还自定义了一个和系统规则相同的optional，那么系统规则就会被这里的规则覆盖。
+					<br><b class="text_strong">参数含义如下：</b>
+					<br><b>$key</b>   要验证的数据在$data中的key键
+					<br><b>$value</b> 要验证的数据,也就是：$data[$key]
+					<br><b>$data</b>  要验证的数据
+					<br><b>$args</b>  规则后面的参数数组，比如：range_len[6,16]，那么$args就是array(6,16)
+					<br><b>$returnValue</b> 如果要改变传入$value的值，把改变后的值赋值给$returnValue变量即可。
+					<br>比如上面我们自定义规则encodePassword，把值md5加密了一次，
+					<br>那么Sr::checkData($data, $rules, &$returnData, &$errorMessage, &$db = null)验证数据通过之后，
+					<br><b>$returnData</b>的数据中的使用了encodePassword规则的字段都会被md5加密。
+					<br><b>$break</b> 对于一个字段多条验证规则存在的时候，如果设置$break为true那么该字段的该条规则之后的验证规则不在起作用
+					<br><b class="text_strong">返回值说明：</b>
+					<br>返回布尔代表成功和失败。
+					<br>返回成功ture，Soter会使用字段的验证规则数组中当前规则下面的规则继续验证。
+					<br>返回失败false，Soter会终止验证，设置验证失败信息，然后返回false验证失败。
+
+                                </li>
+				<li>
                                         <h2 class="title_h2">Soter验证规则</h2>
 					<table class="table table-bordered table-hover" style="word-break: normal;">
 						<tbody>
