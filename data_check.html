@@ -224,11 +224,12 @@
 								</td>
 								<td>
 									如果数据中不存在指定的键名称，则返回FALSE。
-									
+
 								</td>
 								<td>
-									requiredKey[email] 数据中必须包含email字段。
-									<br>requiredKey[email,user] 数据中必须包含email,user字段。
+									requiredKey 数据中必须包含当前字段。
+									requiredKey[email] 数据中必须包含当前字段和email字段。
+									<br>requiredKey[email,user] 数据中必须包含当前字段和email,user字段。
 								</td>
 							</tr>
 							<tr>
@@ -393,8 +394,8 @@
 									len
 								</td>
 								<td>
-									如果表单元素值的字符长度不是指定的长度，则返回FALSE。
-									<br>支持数组，数组的时候，数组里面存在元素的字符长度不是指定的长度，则返回FALSE。
+									如果表单元素值的字符长度不是指定的大小，则返回FALSE。
+									<br>支持数组，数组的时候，数组里面存在元素值的字符长度不是指定的大小，则返回FALSE。
 								</td>
 								<td>
 									len[8]
