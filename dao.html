@@ -243,8 +243,8 @@
                                         <br>$fields 选填：select的字段，全部用*，多个字段用逗号分隔
                                         <br>$where 选填：where条件，关联数组
                                         <br>$orderBy 选填：排序字段，比如：array('time'=>'desc')或者array('time'=>'desc','id'=>'asc')
-                                        <br>$pageBarOrder 选填：分页条组成，可以参考系统函数手册中分页条方法
-                                        <br>$pageBarACount 选填：分页条a的数量，可以参考系统函数手册中分页条方法
+                                        <br>$pageBarOrder 选填：分页条组成，可以参考<a href="system_functions.html">系统函数手册</a>中分页条方法
+                                        <br>$pageBarACount 选填：分页条a的数量，可以参考<a href="system_functions.html">系统函数手册</a>中分页条方法
                                         <pre class="brush:php">
                                                 var_dump(parent::getPage(1, 2, 4));
                                                 /*上面将输出:array(2) { 
@@ -252,7 +252,7 @@
                                                                 [0]=> array(3) { ["id"]=> string(1) "1" ["username"]=> string(6) "刘一" ["addtime"]=> string(10) "1431356499" } 
                                                                 [1]=> array(3) { ["id"]=> string(1) "2" ["username"]=> string(6) "陈二" ["addtime"]=> string(10) "1422806400" } 
                                                         } 
-                                                        ["page"]=> string(0) "" 
+                                                        ["page"]=> "分页代码" 
                                                 }*/
 
                                                 var_dump(parent::getPage(1, 2, 4, 'username'));
@@ -261,7 +261,7 @@
                                                                 [0]=> array(1) { ["username"]=> string(6) "刘一" } 
                                                                 [1]=> array(1) { ["username"]=> string(6) "陈二" }
                                                         } 
-                                                        ["page"]=> string(0) "" 
+                                                        ["page"]=> "分页代码" 
                                                 }*/
 
                                                 $where = array('id' => array(1,2,3));
@@ -272,7 +272,7 @@
                                                                 [1]=> array(1) { ["username"]=> string(6) "陈二" } 
                                                                 [2]=> array(1) { ["username"]=> string(6) "张三" } 
                                                         }
-                                                        ["page"]=> string(0) "" 
+                                                        ["page"]=> "分页代码" 
                                                 }*/
 
                                                 $where = array('id' => array(1,2,3));
@@ -284,12 +284,48 @@
                                                                 [1]=> array(1) { ["username"]=> string(6) "陈二" } 
                                                                 [2]=> array(1) { ["username"]=> string(6) "刘一" }
                                                         }
-                                                        ["page"]=> string(0) "" 
+                                                        ["page"]=> "分页代码" 
                                                 }*/
 
                                                 $where = array('id' => array(1,2,3));
                                                 $order = array('id' => 'desc');
-                                                var_dump(parent::getPage(1, 3, 4, 'username', $where, $order, array(1, 2, 3, 4)));
+                                                var_dump(parent::getPage(1, 1, 0, 'username', $where, $order, array(1, 2, 3, 4, 5, 6)));
+                                                /*上面将输出:array(2) { 
+                                                        ["items"]=> array(3) { 
+                                                                [0]=> array(1) { ["username"]=> string(6) "张三" } 
+                                                        }
+                                                        ["page"]=> "分页代码" 
+                                                }*/
+
+                                        </pre>
+                                        <h3 class="title_h3">7.SQL搜索</h3>
+                                        通过 search($page, $pagesize, $url, $fields, $cond, Array $values = array(), $pageBarOrder = array(1, 2, 3, 4, 5, 6), $pageBarACount = 10)方法，来获取SQL搜索。
+                                        <br>$page 必填：第几页
+                                        <br>$pagesize 必填：每页多少条
+                                        <br>$url 必填：基础url，里面的{page}会被替换为实际的页码
+                                        <br>$fields 选填：select的字段，全部用*，多个字段用逗号分隔
+                                        <br>$cond 选填：SQL语句where后面的部分，不要带limit
+                                        <br>$values 选填：$cond中的问号的值数组，$cond中使用?可以防止sql注入
+                                        <br>$pageBarOrder 选填：分页条组成，可以参考<a href="system_functions.html">系统函数手册</a>中分页条方法
+                                        <br>$pageBarACount 选填：分页条a的数量，可以参考<a href="system_functions.html">系统函数手册</a>中分页条方法
+                                        <pre class="brush:php">
+                                                var_dump(parent::search(1, 2, 4));
+                                                /*上面将输出:array(2) { 
+                                                        ["items"]=> array(2) { 
+                                                                [0]=> array(3) { ["id"]=> string(1) "1" ["username"]=> string(6) "刘一" ["addtime"]=> string(10) "1431356499" } 
+                                                                [1]=> array(3) { ["id"]=> string(1) "2" ["username"]=> string(6) "陈二" ["addtime"]=> string(10) "1422806400" } 
+                                                        } 
+                                                        ["page"]=> "分页代码" 
+                                                }*/   
+
+                                                var_dump(parent::search(1, 2, 4, 'username'));
+                                                /*上面将输出:array(2) { 
+                                                        ["items"]=> array(2) { 
+                                                                [0]=> array(1) { ["username"]=> string(6) "刘一" } 
+                                                                [1]=> array(1) { ["username"]=> string(6) "陈二" }
+                                                        } 
+                                                        ["page"]=> "分页代码" 
+                                                }*/     
                                         </pre>
                                 </li>
                                 <li>
