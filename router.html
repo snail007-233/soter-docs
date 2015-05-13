@@ -299,7 +299,7 @@
 						server {
 							listen 80;
 							server_name test.com;
-							root /www/test/microphp;
+							root /www/test/soter;
 							index index.html index.htm index.php;
 							charset UTF-8;
 							 if (-d $request_filename) {
@@ -328,7 +328,7 @@
 							 }
 						     }
 					</pre>
-					<br><h3 class="title_h3">2.Apache rewrite规则</h3>
+					<h3 class="title_h3">2.Apache rewrite规则</h3>
 					<pre class="brush:php">
 						#rewrite规则开始
 						AcceptPathInfo On
