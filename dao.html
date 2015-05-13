@@ -235,9 +235,9 @@
                                         下面是介绍自带常用方法：
                                         <h3 class="title_h3">1.设置Dao中使用的数据库操作对象</h3>
                                         通过<code>setDb(Soter_Database_ActiveRecord $db)</code>方法，设置Dao中使用的数据库操作对象。
-                                        <br>默认情况下，Dao是连接<code>Sr::db()</code>连接数据库，如果我们不再使用<code>Sr::db()</code>连接数据库里面数据表，
-                                        <br>那么我们可以通过<code>setDb()</code>来设置另外一个数据库，现在就可以用<code>setDb()</code>来找到数据表了。
-                                        <br>$db 必填：<code>Soter_Database_ActiveRecord</code>对象
+                                        <br>默认情况下，<code>Sr::db()</code>连接数据库，如果我们不再使用<code>Sr::db()</code>连接数据库，
+                                        <br>那么我们可以通过<code>setDb()</code>来设置另外一个数据库。
+                                        <br>setDb()的参数$db 必填：<code>setDb()</code>对象
                                         <br>示例如下：
                                         <pre class="brush:php">
                                                 class Dao_Test extends Soter_Dao {
