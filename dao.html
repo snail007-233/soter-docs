@@ -232,12 +232,11 @@
                                                 }
 
                                         </pre>
-                                        下面是介绍自带常用方法：
+                                        下面介绍Dao层常用方法：
                                         <h3 class="title_h3">1.设置Dao中使用的数据库操作对象</h3>
                                         通过<code>setDb(Soter_Database_ActiveRecord $db)</code>方法，设置Dao中使用的数据库操作对象。
-                                        <br>默认情况下，<code>Sr::db()</code>连接数据库，如果我们不再使用<code>Sr::db()</code>连接数据库，
+                                        <br>默认情况下Dao层使用<code>setDb()</code>连接数据库，如果我们不再使用<code>Sr::db()</code>连接数据库，
                                         <br>那么我们可以通过<code>setDb()</code>来设置另外一个数据库。
-                                        <br>setDb()的参数$db 必填：<code>setDb()</code>对象
                                         <br>示例如下：
                                         <pre class="brush:php">
                                                 class Dao_Test extends Soter_Dao {
