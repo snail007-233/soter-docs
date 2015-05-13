@@ -311,12 +311,6 @@
                                                 $data = array('username' => '张三', 'addtime' => time());
                                                 $userDao = Sr::dao('Test');
                                                 echo $userDao->insert($data);
-                                                //上面将输出:INSERT INTO `test` (`username`,`addtime`) VALUES (?,?)
-
-                                                //如果我们想要直接执行sql,如下:
-                                                $data = array('username' => '张三', 'addtime' => time());
-                                                $userDao = Sr::dao('Test');
-                                                echo $userDao->insert($data)->execute();
                                                 //上面将输出:1
                                         </pre>
                                         <h3 class="title_h3">3.更新数据</h3>
@@ -328,18 +322,12 @@
                                                 $data = array('username' => '王五', 'addtime' => time());
                                                 $userDao = Sr::dao('Test');
                                                 echo $userDao->update($data, 1);
-                                                //上面将输出:UPDATE `test` SET `username` = ? , `addtime` = ? WHERE `id` = ?
+                                                //上面将输出:1
 
                                                 $data = array('addtime' => time());
                                                 $where = array('id' => 1, 'username' => '王五');
                                                 $userDao = Sr::dao('Test');
                                                 echo $userDao->update($data, $where);
-                                                //上面将输出:UPDATE `test` SET `addtime` = ? WHERE `id` = ? AND `username` = ?
-
-                                                //如果我们想要直接执行sql,如下:
-                                                $data = array('username' => '张三', 'addtime' => time());
-                                                $userDao = Sr::dao('Test');
-                                                echo $userDao->update($data, 1)->execute();
                                                 //上面将输出:1
                                         </pre>
                                         <h3 class="title_h3">4.获取一条或者多条数据</h3>
