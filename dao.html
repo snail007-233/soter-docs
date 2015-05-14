@@ -322,7 +322,7 @@
                                                 $userDao = Sr::dao('Test');
                                                 $userDao->update($data, 1);
 
-                                                //2.修改主键是1并且username为'王五'的记录
+                                                //2.修改addtime为当前时间戳，条件username为'王五'、id为1的记录
                                                 $data = array('addtime' => time());
                                                 $where = array('id' => 1, 'username' => '王五');
                                                 $userDao = Sr::dao('Test');
