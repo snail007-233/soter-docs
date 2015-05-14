@@ -352,7 +352,8 @@
 
                                                 //4.根据条件获取多条记录
                                                 $where = array('username' => array('刘一', '陈二'));
-                                                $this->find($where, true);
+                                                $userDao = Sr::dao('Test');
+                                                $userDao->find($where, true);
 
                                                 //5.获取用户名是'刘一'，'陈二'的两个记录,并用addtime排序
                                                 $where = array('username' => array('刘一', '陈二'));
