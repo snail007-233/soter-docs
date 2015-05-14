@@ -428,7 +428,6 @@
                                                 $userDao = Sr::dao('Test');
                                                 $userDao->getPage(1, 10, 'index.do?p={page}', '*', null, null, array(1, 2, 3, 4, 5, 6), 10);
                                         </pre>
-                                        上面的<b>“分页代码”</b>是我们系统方法手册中<b>分页条</b>方法生成代码，了解详细的系统方法的<b>分页条</b>部分,点击进入<a href="system_functions.html">系统方法</a>
                                         <h3 class="title_h3">9.SQL搜索</h3>
                                         通过<code>search($page, $pagesize, $url, $fields, $cond, Array $values = array(), $pageBarOrder = array(1, 2, 3, 4, 5, 6), $pageBarACount = 10)</code>方法，来获取SQL搜索。
                                         <br>$page 必填：第几页
@@ -445,7 +444,6 @@
                                                 $userDao = Sr::dao('Test');
                                                 $userDao->search(1, 2, '#', '*','id>?', array(1))
                                         </pre>
-                                        上面的<b>“分页代码”</b>是我们系统方法手册中<b>分页条</b>方法生成代码，了解详细的系统方法的<b>分页条</b>部分,点击进入<a href="system_functions.html">系统方法</a>
                                 </li>
                         </ol>
                 </fieldset>
