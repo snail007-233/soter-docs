@@ -306,10 +306,10 @@
                                         <br>$data 必填：需要添加的数据 例如：<code>array('username' => '张三', 'addtime' => time());</code>
                                         <br>假如我们Business要调用,如下：
                                         <pre class="brush:php">
+                                                //添加一条username为"张三"，addtime为当前时间戳的数据
                                                 $data = array('username' => '张三', 'addtime' => time());
                                                 $userDao = Sr::dao('Test');
                                                 $userDao->insert($data);
-                                                //返回的是数据表里面的行数受到了影响。
                                         </pre>
                                         <h3 class="title_h3">3.更新数据</h3>
                                         通过<code>update($data, $where)</code>方法，我们可以更新数据。
