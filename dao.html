@@ -340,7 +340,7 @@
                                                 $userDao = Sr::dao('Test');
                                                 $userDao->find($where);
 
-                                                //2.获取主键是1，2的两个记录
+                                                //2.获取主键是1，2的两条记录
                                                 $where = array(1,2);
                                                 $userDao = Sr::dao('Test', true);
                                                 $userDao->find($where);
@@ -355,7 +355,7 @@
                                                 $userDao = Sr::dao('Test');
                                                 $userDao->find($where, true);
 
-                                                //5.获取用户名是'刘一'，'陈二'的两个记录,并用addtime排序
+                                                //5.获取用户名是'刘一'，'陈二'的两条记录,并用addtime排序
                                                 $where = array('username' => array('刘一', '陈二'));
                                                 $userDao = Sr::dao('Test');
                                                 $userDao->find($where, true, array('addtime' => 'asc'));
