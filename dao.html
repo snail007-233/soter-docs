@@ -322,7 +322,7 @@
                                                 $userDao = Sr::dao('Test');
                                                 $userDao->update($data, 1);
 
-                                                //2.修改主键是1并且username为'王五'的记录：
+                                                //2.修改主键是1并且username为'王五'的记录
                                                 $data = array('addtime' => time());
                                                 $where = array('id' => 1, 'username' => '王五');
                                                 $userDao = Sr::dao('Test');
@@ -340,9 +340,9 @@
                                                 $userDao = Sr::dao('Test');
                                                 $userDao->find($where);
 
-                                                //2.获取主键是1，2，3的两个记录
-                                                $where = array(1,2,3);
-                                                $userDao = Sr::dao('Test');
+                                                //2.获取主键是1，2的两个记录
+                                                $where = array(1,2);
+                                                $userDao = Sr::dao('Test', true);
                                                 $userDao->find($where);
                                                 
                                                 //3.根据条件获取一条记录
