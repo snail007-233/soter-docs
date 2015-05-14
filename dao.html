@@ -336,19 +336,16 @@
                                         <br>假如我们Business要调用,如下：
                                         <pre class="brush:php">
                                                 //1.获取主键是10的记录
-                                                $where = 10;
                                                 $userDao = Sr::dao('Test');
-                                                $userDao->find($where);
+                                                $userDao->find(10);
 
                                                 //2.获取主键是1，2的两条记录
-                                                $where = array(1,2);
                                                 $userDao = Sr::dao('Test', true);
-                                                $userDao->find($where);
+                                                $userDao->find(array(1,2));
                                                 
                                                 //3.根据条件获取一条记录
-                                                $where = array('id' => 1);
                                                 $userDao = Sr::dao('Test');
-                                                $userDao->find($where);
+                                                $userDao->find(array('id' => 1));
 
                                                 //4.根据条件获取多条记录
                                                 $where = array('username' => array('刘一', '陈二'));
@@ -373,9 +370,8 @@
                                                 $userDao->findAll();
 
                                                 //2.查询表中username为"刘一"的所有数据。
-                                                $where = array('username' => '刘一');
                                                 $userDao = Sr::dao('Test');
-                                                $userDao->findAll($where);
+                                                $userDao->findAll(array('username' => '刘一'));
 
                                                 //3.查询表中id为1的所有数据，并且按着id倒序排列。
                                                 $userDao = Sr::dao('Test');
@@ -406,11 +402,9 @@
                                                 $userDao = Sr::dao('Test');
                                                 $userDao->delete(1);
 
-                                                //2.删除主键是1,2,3的记录,记录中gid是3的记录
-                                                $values = array(1,2,3);
-                                                $cond = array('username' => '刘一');
+                                                //2.删除主键是1,2,3的记录,记录中username是'刘一'的记录
                                                 $userDao = Sr::dao('Test');
-                                                $userDao->delete($values);
+                                                $userDao->delete(array(1,2,3), array('username' => '刘一'));
                                         </pre>
                                         <h3 class="title_h3">8.分页方法</h3>
                                         通过<code>getPage($page, $pagesize, $url, $fields = '*', Array $where = null, $orderBy = array(), $pageBarOrder = array(1, 2, 3, 4, 5, 6), $pageBarACount = 10)</code>方法，我们可以分页获取数据。
