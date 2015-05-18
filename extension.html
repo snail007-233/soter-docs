@@ -83,7 +83,8 @@
                                         <br><b>1.get</b>
                                         <pre class="brush:php">
                                                 $http = Sr::extension('Http');
-                                                $data = $http->get('https://www.baidu.com/');//返回的是页面内容
+                                                //返回的是页面内容
+                                                $data = $http->get('https://www.baidu.com/');                                                
                                                 //如果有传递数据，可以传递第二个参数
                                                 $args['code'] = '1';
                                                 $data = $http->get('https://baidu.com/',$args);
