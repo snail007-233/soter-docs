@@ -201,8 +201,8 @@
                                                 $http = Sr::extension('Http');
                                                 $http->lastUrl();
                                         </pre>
-                                        <b>14.设置curl句柄参数</b>
-                                        <br>通过<code>lastUrl()</code>方法，来设置curl句柄参数。
+                                        <b>13.设置curl句柄参数</b>
+                                        <br>通过<code>setOpt($opt, $val)</code>方法，来设置curl句柄参数。
                                         <br>参数说明：
                                         <br>$opt 必填：curl_setopt()的第二个参数
                                         <br>$val 必填：curl_setopt()的第三个参数
@@ -211,7 +211,7 @@
                                                 $http = Sr::extension('Http');
                                                 $http->setOpt(CURLOPT_HEADER, false);
                                         </pre>
-                                        <b>15.设置附加的cookie，这个不会影响自动管理的cookie</b>
+                                        <b>14.设置附加的cookie，这个不会影响自动管理的cookie</b>
                                         <br>通过<code>setCookie($key, $val = NULL)</code>方法，来设置附加的cookie，这个不会影响自动管理的cookie。
                                         <br>提醒：<br>
                                         1.每次请求完成后附加的cookie会被清空，自动管理的cookie不会受到影响。<br>
