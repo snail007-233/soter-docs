@@ -49,13 +49,18 @@
 				</div>
 				<div class="col-md-10">
 					<div id="loadingInfo" style="display:none;">正在加载...</div>
-                                        <iframe src="default.html" name="mainBody"  id="mainBody" scrolling="no" frameborder="0" width="100%" onload="$('#loadingInfo').hide();this.height = this.contentWindow.document.documentElement.scrollHeight;
-							$(window).scrollTop(250)"></iframe>
+                                        <iframe src="default.html" name="mainBody"  id="mainBody" scrolling="no" frameborder="0" width="100%" onload="$('#loadingInfo').hide();this.height = this.contentWindow.document.documentElement.scrollHeight;$(window).scrollTop(250)"></iframe>
 				</div>
 			</div>
 		</div>
                 <div id="gotoTop" title="返回顶部" style="display: block;"></div>
 		<script src="js/inc.foot.js"></script>
-		 
+		<script>
+		$(function () {
+			if (window.location.hash.length > 1) {
+				$('#mainBody').attr('src', window.location.hash.substr(1));
+			}
+		});
+		</script>
 	</body>
 </html>
