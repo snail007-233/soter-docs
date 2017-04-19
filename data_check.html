@@ -261,6 +261,59 @@
 							</tr>
 							<tr>
 								<td>
+									function
+								</td>
+								<td>
+									自定义函数,匿名函数或者类方法验证规则。
+								</td>
+								<td>比如现在有下面的类定义和函数定义,类有两个方法,一个是静态方法methoda,一个是非静态方法method.自定义函数method
+<pre>
+class functiontest {
+
+	public function method($key, $value, $data, $args, &$returnValue, &$break, &$db) {
+		//验证代码foo
+		$returnValue = 'aaa';
+		//验证不通过,就返回一个提示语字符串
+		return 'error_message';
+	}
+
+	public static function methoda($key, $value, $data, $args, &$returnValue, &$break, &$db) {
+		//验证代码foo
+		//验证通过不需要返回,这里如果需要修改值,直接对$returnValue赋值即可
+		$returnValue = 'bbb';
+	}
+}
+function method($key, $value, $data, $args, &$returnValue, &$break, &$db) {
+	$returnValue = 'ddd';
+}
+</pre>
+由于数组的键不能重复,所以如果我们需要多个function验证规则,我们只需要随便传递不同的参数即可.
+验证规则实例:
+<pre>
+$obj=new functiontest();
+$rules=array(
+	'function[1]'=>function($key, $value, $data, $args, &$returnValue, &$break, &$db){//匿名函数验证
+		//foo
+	},
+	'function[2]'=>function($key, $value, $data, $args, &$returnValue, &$break, &$db){
+		//foo
+	},
+	'function[3]'=>array($obj,'method'),//调用类的非静态方法验证
+	'function[4]'=>array($obj,'methoda'),//调用类的静态方法验证
+	'function[5]'=>'\method',//调用自定义的函数验证
+);
+</pre>
+<b>提示:</b><br>
+具体参数意义,可以参考本页的"自定义验证规则"部分的参数含义.
+
+
+								</td>
+								<td>
+									<br>
+								</td>
+							</tr>
+							<tr>
+								<td>
 									functions
 								</td>
 								<td>
